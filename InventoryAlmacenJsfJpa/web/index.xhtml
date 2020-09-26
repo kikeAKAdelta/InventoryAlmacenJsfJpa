@@ -1,33 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <title>Inventario Almacen</title>
+        <!--<h:outputStylesheet name="css/jsfcrud.css"/>-->
+        <!--<h:outputStylesheet name="css/estilos.css"/>-->
+        <!--<link rel="stylesheet" href="./WEB-INF/resources/css/estilos.css"/>-->
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/box/List" value="Show All Box Items"/>
-        <br />
-        <h:link outcome="/category/List" value="Show All Category Items"/>
-        <br />
-        <h:link outcome="/operation/List" value="Show All Operation Items"/>
-        <br />
-        <h:link outcome="/operationType/List" value="Show All OperationType Items"/>
-        <br />
-        <h:link outcome="/person/List" value="Show All Person Items"/>
-        <br />
-        <h:link outcome="/product/List" value="Show All Product Items"/>
-        <br />
-        <h:link outcome="/productType/List" value="Show All ProductType Items"/>
-        <br />
-        <h:link outcome="/sell/List" value="Show All Sell Items"/>
-        <br />
-        <h:link outcome="/user/List" value="Show All User Items"/>
+        
+        <p:tabMenu activeIndex="0" >
+            <p:menuitem value="Home" outcome="index" icon="ui-icon-star" styleClass="ui-menuitem"/>
+            <p:menuitem value="Clientes/Proveedores" outcome="/person/List" icon="ui-icon-star"/>
+            <p:menuitem value="Productos" outcome="/product/List" icon="ui-icon-star"/>
+            <p:menuitem value="Categoria" outcome="/category/List" icon="ui-icon-star"/>
+            <p:menuitem value="Tipo de Producto" outcome="/person/List" icon="ui-icon-star"/>
+            <p:menuitem value="Compra/Venta" outcome="/sell/List" icon="ui-icon-star"/>
+            <p:menuitem value="Usuarios" outcome="/user/List" icon="ui-icon-star"/>
+            <p:menuitem value="Corte de Caja" outcome="/box/List" icon="ui-icon-star"/>
+            <p:menuitem value="Operacion" outcome="/operation/List" icon="ui-icon-star"/>
+        </p:tabMenu>
+        
+        
+       
+        <!--<h:link outcome="/box/List" value="Show All Box Items"/>-->
+        
+        
     </h:body>
 
 
