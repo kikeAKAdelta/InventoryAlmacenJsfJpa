@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditSellTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditSellLabel_idSell}" for="idSell" />
+                    <h:inputText id="idSell" value="#{sellController.selected.idSell}" title="#{bundle.EditSellTitle_idSell}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_idSell}"/>
+                    <h:outputLabel value="#{bundle.EditSellLabel_total}" for="total" />
+                    <h:inputText id="total" value="#{sellController.selected.total}" title="#{bundle.EditSellTitle_total}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_total}"/>
+                    <h:outputLabel value="#{bundle.EditSellLabel_cash}" for="cash" />
+                    <h:inputText id="cash" value="#{sellController.selected.cash}" title="#{bundle.EditSellTitle_cash}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_cash}"/>
+                    <h:outputLabel value="#{bundle.EditSellLabel_discount}" for="discount" />
+                    <h:inputText id="discount" value="#{sellController.selected.discount}" title="#{bundle.EditSellTitle_discount}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_discount}"/>
+                    <h:outputLabel value="#{bundle.EditSellLabel_createdAt}" for="createdAt" />
+                    <h:inputText id="createdAt" value="#{sellController.selected.createdAt}" title="#{bundle.EditSellTitle_createdAt}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditSellLabel_idPerson}" for="idPerson" />
+                    <h:selectOneMenu id="idPerson" value="#{sellController.selected.idPerson}" title="#{bundle.EditSellTitle_idPerson}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_idPerson}">
+                        <f:selectItems value="#{personController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditSellLabel_idUser}" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{sellController.selected.idUser}" title="#{bundle.EditSellTitle_idUser}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_idUser}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditSellLabel_idOperationType}" for="idOperationType" />
+                    <h:selectOneMenu id="idOperationType" value="#{sellController.selected.idOperationType}" title="#{bundle.EditSellTitle_idOperationType}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_idOperationType}">
+                        <f:selectItems value="#{operationTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditSellLabel_idBox}" for="idBox" />
+                    <h:selectOneMenu id="idBox" value="#{sellController.selected.idBox}" title="#{bundle.EditSellTitle_idBox}" required="true" requiredMessage="#{bundle.EditSellRequiredMessage_idBox}">
+                        <f:selectItems value="#{boxController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{sellController.update}" value="#{bundle.EditSellSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditSellViewLink}"/>
+                <br />
+                <h:commandLink action="#{sellController.prepareList}" value="#{bundle.EditSellShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditSellIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

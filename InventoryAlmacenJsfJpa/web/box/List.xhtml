@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListBoxTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListBoxEmpty}" rendered="#{boxController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{boxController.items.rowCount > 0}">
+                    <h:outputText value="#{boxController.pagination.pageFirstItem + 1}..#{boxController.pagination.pageLastItem + 1}/#{boxController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{boxController.previous}" value="#{bundle.Previous} #{boxController.pagination.pageSize}" rendered="#{boxController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{boxController.next}" value="#{bundle.Next} #{boxController.pagination.pageSize}" rendered="#{boxController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{boxController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBoxTitle_idBox}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idBox}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBoxTitle_createdAt}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdAt}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{boxController.prepareView}" value="#{bundle.ListBoxViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{boxController.prepareEdit}" value="#{bundle.ListBoxEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{boxController.destroy}" value="#{bundle.ListBoxDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{boxController.prepareCreate}" value="#{bundle.ListBoxCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListBoxIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

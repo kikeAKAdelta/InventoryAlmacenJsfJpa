@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditOperationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditOperationLabel_idOperation}" for="idOperation" />
+                    <h:inputText id="idOperation" value="#{operationController.selected.idOperation}" title="#{bundle.EditOperationTitle_idOperation}" required="true" requiredMessage="#{bundle.EditOperationRequiredMessage_idOperation}"/>
+                    <h:outputLabel value="#{bundle.EditOperationLabel_quantity}" for="quantity" />
+                    <h:inputText id="quantity" value="#{operationController.selected.quantity}" title="#{bundle.EditOperationTitle_quantity}" required="true" requiredMessage="#{bundle.EditOperationRequiredMessage_quantity}"/>
+                    <h:outputLabel value="#{bundle.EditOperationLabel_createdAt}" for="createdAt" />
+                    <h:inputText id="createdAt" value="#{operationController.selected.createdAt}" title="#{bundle.EditOperationTitle_createdAt}" required="true" requiredMessage="#{bundle.EditOperationRequiredMessage_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditOperationLabel_idProduct}" for="idProduct" />
+                    <h:selectOneMenu id="idProduct" value="#{operationController.selected.idProduct}" title="#{bundle.EditOperationTitle_idProduct}" required="true" requiredMessage="#{bundle.EditOperationRequiredMessage_idProduct}">
+                        <f:selectItems value="#{productController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperationLabel_idOperationType}" for="idOperationType" />
+                    <h:selectOneMenu id="idOperationType" value="#{operationController.selected.idOperationType}" title="#{bundle.EditOperationTitle_idOperationType}" required="true" requiredMessage="#{bundle.EditOperationRequiredMessage_idOperationType}">
+                        <f:selectItems value="#{operationTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperationLabel_idSell}" for="idSell" />
+                    <h:selectOneMenu id="idSell" value="#{operationController.selected.idSell}" title="#{bundle.EditOperationTitle_idSell}" required="true" requiredMessage="#{bundle.EditOperationRequiredMessage_idSell}">
+                        <f:selectItems value="#{sellController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{operationController.update}" value="#{bundle.EditOperationSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditOperationViewLink}"/>
+                <br />
+                <h:commandLink action="#{operationController.prepareList}" value="#{bundle.EditOperationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditOperationIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSellTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSellLabel_idSell}"/>
+                    <h:outputText value="#{sellController.selected.idSell}" title="#{bundle.ViewSellTitle_idSell}"/>
+                    <h:outputText value="#{bundle.ViewSellLabel_total}"/>
+                    <h:outputText value="#{sellController.selected.total}" title="#{bundle.ViewSellTitle_total}"/>
+                    <h:outputText value="#{bundle.ViewSellLabel_cash}"/>
+                    <h:outputText value="#{sellController.selected.cash}" title="#{bundle.ViewSellTitle_cash}"/>
+                    <h:outputText value="#{bundle.ViewSellLabel_discount}"/>
+                    <h:outputText value="#{sellController.selected.discount}" title="#{bundle.ViewSellTitle_discount}"/>
+                    <h:outputText value="#{bundle.ViewSellLabel_createdAt}"/>
+                    <h:outputText value="#{sellController.selected.createdAt}" title="#{bundle.ViewSellTitle_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSellLabel_idPerson}"/>
+                    <h:outputText value="#{sellController.selected.idPerson}" title="#{bundle.ViewSellTitle_idPerson}"/>
+                    <h:outputText value="#{bundle.ViewSellLabel_idUser}"/>
+                    <h:outputText value="#{sellController.selected.idUser}" title="#{bundle.ViewSellTitle_idUser}"/>
+                    <h:outputText value="#{bundle.ViewSellLabel_idOperationType}"/>
+                    <h:outputText value="#{sellController.selected.idOperationType}" title="#{bundle.ViewSellTitle_idOperationType}"/>
+                    <h:outputText value="#{bundle.ViewSellLabel_idBox}"/>
+                    <h:outputText value="#{sellController.selected.idBox}" title="#{bundle.ViewSellTitle_idBox}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{sellController.destroyAndView}" value="#{bundle.ViewSellDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewSellEditLink}"/>
+                <br />
+                <h:commandLink action="#{sellController.prepareCreate}" value="#{bundle.ViewSellCreateLink}" />
+                <br />
+                <h:commandLink action="#{sellController.prepareList}" value="#{bundle.ViewSellShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewSellIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

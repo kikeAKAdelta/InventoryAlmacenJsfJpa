@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPersonTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPersonLabel_idPerson}"/>
+                    <h:outputText value="#{personController.selected.idPerson}" title="#{bundle.ViewPersonTitle_idPerson}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_name}"/>
+                    <h:outputText value="#{personController.selected.name}" title="#{bundle.ViewPersonTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_lastname}"/>
+                    <h:outputText value="#{personController.selected.lastname}" title="#{bundle.ViewPersonTitle_lastname}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_company}"/>
+                    <h:outputText value="#{personController.selected.company}" title="#{bundle.ViewPersonTitle_company}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_address1}"/>
+                    <h:outputText value="#{personController.selected.address1}" title="#{bundle.ViewPersonTitle_address1}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_address2}"/>
+                    <h:outputText value="#{personController.selected.address2}" title="#{bundle.ViewPersonTitle_address2}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_phone1}"/>
+                    <h:outputText value="#{personController.selected.phone1}" title="#{bundle.ViewPersonTitle_phone1}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_phone2}"/>
+                    <h:outputText value="#{personController.selected.phone2}" title="#{bundle.ViewPersonTitle_phone2}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_email1}"/>
+                    <h:outputText value="#{personController.selected.email1}" title="#{bundle.ViewPersonTitle_email1}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_email2}"/>
+                    <h:outputText value="#{personController.selected.email2}" title="#{bundle.ViewPersonTitle_email2}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_kind}"/>
+                    <h:outputText value="#{personController.selected.kind}" title="#{bundle.ViewPersonTitle_kind}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_createdAt}"/>
+                    <h:outputText value="#{personController.selected.createdAt}" title="#{bundle.ViewPersonTitle_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{personController.destroyAndView}" value="#{bundle.ViewPersonDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPersonEditLink}"/>
+                <br />
+                <h:commandLink action="#{personController.prepareCreate}" value="#{bundle.ViewPersonCreateLink}" />
+                <br />
+                <h:commandLink action="#{personController.prepareList}" value="#{bundle.ViewPersonShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPersonIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

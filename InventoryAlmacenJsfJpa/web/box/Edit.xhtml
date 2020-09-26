@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditBoxTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditBoxLabel_idBox}" for="idBox" />
+                    <h:inputText id="idBox" value="#{boxController.selected.idBox}" title="#{bundle.EditBoxTitle_idBox}" required="true" requiredMessage="#{bundle.EditBoxRequiredMessage_idBox}"/>
+                    <h:outputLabel value="#{bundle.EditBoxLabel_createdAt}" for="createdAt" />
+                    <h:inputText id="createdAt" value="#{boxController.selected.createdAt}" title="#{bundle.EditBoxTitle_createdAt}" required="true" requiredMessage="#{bundle.EditBoxRequiredMessage_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{boxController.update}" value="#{bundle.EditBoxSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditBoxViewLink}"/>
+                <br />
+                <h:commandLink action="#{boxController.prepareList}" value="#{bundle.EditBoxShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditBoxIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
