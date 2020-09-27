@@ -7,6 +7,7 @@ package com.beans;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -60,5 +61,41 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
+    
+    
+   //--------metodos propios Enrique------------------
+    
+   /*Conteo de clientes y proveedores*/
+   public Object countPerson(){
+       Query query = getEntityManager().createQuery("SELECT count(0) FROM Person e");
+       return query.getSingleResult();
+   }
+   
+   /*Conteo de clientes*/
+   public Object countPersonClient(){
+       Query query = getEntityManager().createQuery("SELECT count(0) FROM Person e WHERE e.kind = 1");
+       return query.getSingleResult();
+   }
+   
+   /*Conteo de proveedores*/
+   public Object countPersonProvider(){
+       Query query = getEntityManager().createQuery("SELECT count(0) FROM Person e WHERE e.kind = 2");
+       return query.getSingleResult();
+   }
+   
+   
+   /*Obtiene lista de Clientes*/
+   public List<T> getPersonClients(){
+       Query query = getEntityManager().createQuery("SELECT e FROM Person e WHERE e.kind = 1");
+       return query.getResultList();
+   }
+   
+   /*Obtiene lista de Proveedores*/
+   public List<T> getPersonProvider(){
+       Query query = getEntityManager().createQuery("SELECT e FROM Person e WHERE e.kind = 2");
+       return query.getResultList();
+   }
+   
+   //-------------- fin metodos propios
     
 }

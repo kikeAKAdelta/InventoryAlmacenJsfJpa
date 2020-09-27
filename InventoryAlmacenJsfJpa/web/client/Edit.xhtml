@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPersonTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPersonLabel_idPerson}" for="idPerson" />
+                    <h:inputText id="idPerson" value="#{personController.selected.idPerson}" title="#{bundle.EditPersonTitle_idPerson}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_idPerson}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{personController.selected.name}" title="#{bundle.EditPersonTitle_name}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_lastname}" for="lastname" />
+                    <h:inputText id="lastname" value="#{personController.selected.lastname}" title="#{bundle.EditPersonTitle_lastname}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_lastname}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_company}" for="company" />
+                    <h:inputText id="company" value="#{personController.selected.company}" title="#{bundle.EditPersonTitle_company}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_company}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_address1}" for="address1" />
+                    <h:inputText id="address1" value="#{personController.selected.address1}" title="#{bundle.EditPersonTitle_address1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_address1}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_address2}" for="address2" />
+                    <h:inputText id="address2" value="#{personController.selected.address2}" title="#{bundle.EditPersonTitle_address2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_address2}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_phone1}" for="phone1" />
+                    <h:inputText id="phone1" value="#{personController.selected.phone1}" title="#{bundle.EditPersonTitle_phone1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_phone1}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_phone2}" for="phone2" />
+                    <h:inputText id="phone2" value="#{personController.selected.phone2}" title="#{bundle.EditPersonTitle_phone2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_phone2}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_email1}" for="email1" />
+                    <h:inputText id="email1" value="#{personController.selected.email1}" title="#{bundle.EditPersonTitle_email1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_email1}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_email2}" for="email2" />
+                    <h:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.EditPersonTitle_email2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_email2}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_kind}" for="kind" />
+                    <h:inputText id="kind" value="#{personController.selected.kind}" title="#{bundle.EditPersonTitle_kind}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_kind}"/>
+                    <h:outputLabel value="#{bundle.EditPersonLabel_createdAt}" for="createdAt" />
+                    <h:inputText id="createdAt" value="#{personController.selected.createdAt}" title="#{bundle.EditPersonTitle_createdAt}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{personController.update}" value="#{bundle.EditPersonSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPersonViewLink}"/>
+                <br />
+                <h:commandLink action="#{personController.prepareList}" value="#{bundle.EditPersonShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPersonIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

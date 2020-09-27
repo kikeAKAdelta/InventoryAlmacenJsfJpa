@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePersonTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <div class="container">
+            <h1>Agregar Cliente</h1>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            
+            <h:form class="clientCreate form-group">
+                <h:panelGrid columns="2" class="clientCreate2">
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_idPerson}" for="idPerson" />
+                    <p:inputText id="idPerson" value="#{personController.selected.idPerson}" title="#{bundle.CreatePersonTitle_idPerson}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_idPerson}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_name}" for="name" />
+                    <p:inputText id="name" value="#{personController.selected.name}" title="#{bundle.CreatePersonTitle_name}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_lastname}" for="lastname" />
+                    <p:inputText id="lastname" value="#{personController.selected.lastname}" title="#{bundle.CreatePersonTitle_lastname}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_lastname}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_company}" for="company" />
+                    <p:inputText id="company" value="#{personController.selected.company}" title="#{bundle.CreatePersonTitle_company}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_company}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_address1}" for="address1" />
+                    <p:inputText id="address1" value="#{personController.selected.address1}" title="#{bundle.CreatePersonTitle_address1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_address1}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_address2}" for="address2" />
+                    <p:inputText id="address2" value="#{personController.selected.address2}" title="#{bundle.CreatePersonTitle_address2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_address2}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_phone1}" for="phone1" />
+                    <p:inputText id="phone1" value="#{personController.selected.phone1}" title="#{bundle.CreatePersonTitle_phone1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_phone1}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_phone2}" for="phone2" />
+                    <p:inputText id="phone2" value="#{personController.selected.phone2}" title="#{bundle.CreatePersonTitle_phone2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_phone2}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_email1}" for="email1" />
+                    <p:inputText id="email1" value="#{personController.selected.email1}" title="#{bundle.CreatePersonTitle_email1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email1}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_email2}" for="email2" />
+                    <p:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.CreatePersonTitle_email2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email2}"/>
+                    <h:outputLabel value="#{bundle.CreatePersonLabel_kind}" for="kind" />
+                    <p:inputText id="kind" value="#{personController.selected.kind}" title="# {bundle.CreatePersonTitle_kind}" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_kind}"/>
+                    <!--<h:outputLabel value="# {bundle.CreatePersonLabel_createdAt}" for="createdAt" />
+                    <h:inputText id="createdAt" value="# {personController.selected.createdAt}" title="# {bundle.CreatePersonTitle_createdAt}" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>-->
+                    
+                    <p:outputLabel for="popup" value="Popup:" />
+                    <p:calendar id="popup" value="#{personController.selected.createdAt}" pattern="dd-MM-yyyy" />
+                    
+                    <br />
+                <h:panelGroup />
+                <p:commandButton action="#{personController.create}" value="#{bundle.CreatePersonSaveLink}" />
+                <p:commandButton action="/client/List?faces-redirect=true" value="Cancel" immediate="true"/>
+                <br />
+                </h:panelGrid>
+                
+            </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -6,6 +6,7 @@ import com.controllers.util.PaginationHelper;
 import com.beans.PersonFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -191,7 +192,39 @@ public class PersonController implements Serializable {
     public Person getPerson(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    //-------------------- metodos propios ENRIQUE ---------------------------
+    
+    //Obtiene conteo de clientes y proveedores
+    public Object getCountPerson(){
+        return ejbFacade.countPerson();
+    }
+    
+    //Obtiene conteo de clientes
+    public Object getCountPersonClient(){
+        return ejbFacade.countPersonClient();
+    }
+    
+    //Obtiene conteo de clientes
+    public Object getCountPersonProvider(){
+        return ejbFacade.countPersonProvider();
+    }
+    
+    //Obtiene lista de clientes
+    public List<Person> getPersonClients(){
+        return ejbFacade.getPersonClients();
+    }
+    
+    //Obtiene lista de proveedores
+    public List<Person> getPersonProvider(){
+        return ejbFacade.getPersonProvider();
+    }
+    
+    
 
+    //------------------fin----------------------------------
+    
+    
     @FacesConverter(forClass = Person.class)
     public static class PersonControllerConverter implements Converter {
 
