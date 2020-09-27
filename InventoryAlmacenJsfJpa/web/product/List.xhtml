@@ -3,13 +3,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListProductTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            
+            <h:form>
+                <p:tabMenu activeIndex="#{param.i}" >
+                   <p:menuitem value="Home" outcome="/index" icon="ui-icon-star" styleClass="ui-menuitem">
+                       <f:param name="i" value="0" />
+                   </p:menuitem>
+                   <p:menuitem value="Clientes/Proveedores" outcome="/person/List" icon="ui-icon-star">
+                       <f:param name="i" value="1" />
+                   </p:menuitem>
+                   <p:menuitem value="Productos" outcome="/product/List" icon="ui-icon-star">
+                       <f:param name="i" value="2" />
+                   </p:menuitem>
+                   <p:menuitem value="Categoria" outcome="/category/List" icon="ui-icon-star">
+                       <f:param name="i" value="3" />
+                   </p:menuitem>
+                   <p:menuitem value="Tipo de Producto" outcome="/person/List" icon="ui-icon-star">
+                       <f:param name="i" value="4" />
+                   </p:menuitem>
+                   <p:menuitem value="Compra/Venta" outcome="/sell/List" icon="ui-icon-star">
+                       <f:param name="i" value="5" />
+                   </p:menuitem>
+                   <p:menuitem value="Usuarios" outcome="/user/List" icon="ui-icon-star">
+                       <f:param name="i" value="6" />
+                   </p:menuitem>
+                   <p:menuitem value="Corte de Caja" outcome="/box/List" icon="ui-icon-star">
+                       <f:param name="i" value="7" />
+                   </p:menuitem>
+                   <p:menuitem value="Operacion" outcome="/operation/List" icon="ui-icon-star">
+                       <f:param name="i" value="8" />
+                   </p:menuitem>
+               </p:tabMenu>
+            </h:form>
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -113,7 +146,7 @@
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{productController.prepareCreate}" value="#{bundle.ListProductCreateLink}"/>
+                <p:commandButton value="Add" id="add" action="#{productController.prepareCreate}" style="margin-right:20px;" styleClass="ui-priority-primary" />
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListProductIndexLink}"/>
