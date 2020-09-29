@@ -6,11 +6,13 @@ import com.controllers.util.PaginationHelper;
 import com.beans.PersonFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -84,6 +86,7 @@ public class PersonController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PersonCreated"));
+            //cleanClientTxt();
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -218,6 +221,25 @@ public class PersonController implements Serializable {
     //Obtiene lista de proveedores
     public List<Person> getPersonProvider(){
         return ejbFacade.getPersonProvider();
+    }
+    
+    //metodo de limpieza de datos cuando se agrega un nuevo liente
+    public void cleanClientTxt(){
+        current.setIdPerson(0);
+        current.setName("");
+        current.setLastname("");
+        current.setCompany("");
+        current.setAddress1("");
+        current.setAddress2("");
+        current.setEmail1("");
+        current.setEmail2("");
+        current.setPhone1("");
+        current.setPhone2("");
+        current.setKind(0);
+        current.setCreatedAt(new Date());
+        
+        FacesMessage msg = new FacesMessage("Fue Agregado correctamente");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     
