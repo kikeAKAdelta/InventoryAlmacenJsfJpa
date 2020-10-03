@@ -4,10 +4,17 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-    <context-param>
+    <!--<context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>afternoon</param-value>
-    </context-param>
+    </context-param> -->
+    
+    <!--Para problemas con ajax de id duplicados
+    <context-param>
+       <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+       <param-value>true</param-value>
+    </context-param>-->
+    
     <context-param>
    <param-name>facelets.SKIP_COMMENTS</param-name>
    <param-value>true</param-value>

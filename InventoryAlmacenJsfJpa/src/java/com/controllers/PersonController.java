@@ -4,16 +4,19 @@ import com.entidades.Person;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.PersonFacade;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -22,7 +25,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("personController")
-@SessionScoped
+@RequestScoped
 public class PersonController implements Serializable {
 
     private Person current;
@@ -31,6 +34,7 @@ public class PersonController implements Serializable {
     private com.beans.PersonFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private UIData personTable;
 
     public PersonController() {
     }
@@ -241,6 +245,27 @@ public class PersonController implements Serializable {
         FacesMessage msg = new FacesMessage("Fue Agregado correctamente");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+    
+    //-----------elimina a un cliente -------------
+    public void deletePerson(ActionEvent event){
+        current = (Person) this.personTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdPerson());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        performDestroy();
+    }
+
+    public UIData getPersonTable() {
+        return personTable;
+    }
+
+    public void setPersonTable(UIData personTable) {
+        this.personTable = personTable;
+    }
+    
+    
     
     
 
