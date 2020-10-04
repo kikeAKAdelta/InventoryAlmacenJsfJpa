@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -101,14 +102,14 @@ public class PersonController implements Serializable {
     public String prepareEdit() {
         current = (Person) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "/client/Edit";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PersonUpdated"));
-            return "View";
+            return "List?faces-redirect=true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -257,6 +258,25 @@ public class PersonController implements Serializable {
         performDestroy();
     }
 
+    //------------edita un client -----------
+    public String editPerson(ActionEvent event){
+        current = (Person) this.personTable.getRowData();
+        //FacesMessage facesMessage = new FacesMessage("Se ha editado!! " + current.getIdPerson());
+        
+        //facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        //FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        //performDestroy();
+        
+        return "/client/Edit";
+    }
+    
+    @PostConstruct
+    public void init(){
+        this.current = new Person();
+    }
+
+    
     public UIData getPersonTable() {
         return personTable;
     }
@@ -264,6 +284,16 @@ public class PersonController implements Serializable {
     public void setPersonTable(UIData personTable) {
         this.personTable = personTable;
     }
+
+    public Person getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Person current) {
+        this.current = current;
+    }
+    
+    
     
     
     
