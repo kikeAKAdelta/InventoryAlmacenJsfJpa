@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -14,43 +15,50 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
+                <h2>Editar Proveedor</h2>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditPersonLabel_idPerson}" for="idPerson" />
-                    <h:inputText id="idPerson" value="#{personController.selected.idPerson}" title="#{bundle.EditPersonTitle_idPerson}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_idPerson}"/>
+                    <h:inputText id="idPerson" value="#{personController.current.idPerson}" title="#{bundle.EditPersonTitle_idPerson}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_idPerson}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{personController.selected.name}" title="#{bundle.EditPersonTitle_name}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_name}"/>
+                    <h:inputText id="name" value="#{personController.current.name}" title="#{bundle.EditPersonTitle_name}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_name}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_lastname}" for="lastname" />
-                    <h:inputText id="lastname" value="#{personController.selected.lastname}" title="#{bundle.EditPersonTitle_lastname}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_lastname}"/>
+                    <h:inputText id="lastname" value="#{personController.current.lastname}" title="#{bundle.EditPersonTitle_lastname}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_lastname}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_company}" for="company" />
-                    <h:inputText id="company" value="#{personController.selected.company}" title="#{bundle.EditPersonTitle_company}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_company}"/>
+                    <h:inputText id="company" value="#{personController.current.company}" title="#{bundle.EditPersonTitle_company}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_company}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditPersonLabel_address1}" for="address1" />
-                    <h:inputText id="address1" value="#{personController.selected.address1}" title="#{bundle.EditPersonTitle_address1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_address1}"/>
+                    <h:inputText id="address1" value="#{personController.current.address1}" title="#{bundle.EditPersonTitle_address1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_address1}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_address2}" for="address2" />
-                    <h:inputText id="address2" value="#{personController.selected.address2}" title="#{bundle.EditPersonTitle_address2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_address2}"/>
+                    <h:inputText id="address2" value="#{personController.current.address2}" title="#{bundle.EditPersonTitle_address2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_address2}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_phone1}" for="phone1" />
-                    <h:inputText id="phone1" value="#{personController.selected.phone1}" title="#{bundle.EditPersonTitle_phone1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_phone1}"/>
+                    <h:inputText id="phone1" value="#{personController.current.phone1}" title="#{bundle.EditPersonTitle_phone1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_phone1}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_phone2}" for="phone2" />
-                    <h:inputText id="phone2" value="#{personController.selected.phone2}" title="#{bundle.EditPersonTitle_phone2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_phone2}"/>
+                    <h:inputText id="phone2" value="#{personController.current.phone2}" title="#{bundle.EditPersonTitle_phone2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_phone2}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_email1}" for="email1" />
-                    <h:inputText id="email1" value="#{personController.selected.email1}" title="#{bundle.EditPersonTitle_email1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_email1}"/>
+                    <h:inputText id="email1" value="#{personController.current.email1}" title="#{bundle.EditPersonTitle_email1}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_email1}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_email2}" for="email2" />
-                    <h:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.EditPersonTitle_email2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_email2}"/>
+                    <h:inputText id="email2" value="#{personController.current.email2}" title="#{bundle.EditPersonTitle_email2}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_email2}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_kind}" for="kind" />
-                    <h:inputText id="kind" value="#{personController.selected.kind}" title="#{bundle.EditPersonTitle_kind}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_kind}"/>
+                    <h:inputText id="kind" value="#{personController.current.kind}" title="#{bundle.EditPersonTitle_kind}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_kind}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditPersonLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{personController.selected.createdAt}" title="#{bundle.EditPersonTitle_createdAt}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                    <p:calendar id="idCreatedAt" value="#{personController.current.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_createdAt}" class="form-group" />
+                    
+                    <h:panelGroup /> <h:panelGroup />
+                    <h:commandButton action="#{personController.update}" value="Editar" class="btn btn-primary"/>   
+                    <h:commandButton action="/provider/List?faces-redirect=true" value="Cancelar" class="btn btn-danger" />
+                
+                    
                 </h:panelGrid>
-                <h:commandLink action="#{personController.update}" value="#{bundle.EditPersonSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditPersonViewLink}"/>
-                <br />
-                <h:commandLink action="#{personController.prepareList}" value="#{bundle.EditPersonShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditPersonIndexLink}" />
+                
             </h:form>
         </ui:define>
     </ui:composition>

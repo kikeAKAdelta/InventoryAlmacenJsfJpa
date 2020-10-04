@@ -3,18 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.CreatePersonTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <div class="conatiner">
+            <h1>Agregar Proveedor</h1>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
+            
+            <h:form class="clientForm form-group">
+                
+                <h:panelGrid columns="2" class="clientGrid" id="panel">
                     <h:outputLabel value="#{bundle.CreatePersonLabel_idPerson}" for="idPerson" />
                     <h:inputText id="idPerson" value="#{personController.selected.idPerson}" title="#{bundle.CreatePersonTitle_idPerson}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_idPerson}"/>
                     <h:outputLabel value="#{bundle.CreatePersonLabel_name}" for="name" />
@@ -37,20 +42,19 @@
                     <h:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.CreatePersonTitle_email2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email2}"/>
                     <h:outputLabel value="#{bundle.CreatePersonLabel_kind}" for="kind" />
                     <h:inputText id="kind" value="#{personController.selected.kind}" title="#{bundle.CreatePersonTitle_kind}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_kind}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{personController.selected.createdAt}" title="#{bundle.CreatePersonTitle_createdAt}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                   <h:outputLabel value="Fecha de Creacion: " for="idCreatedAt" />
+                    <p:calendar id="idCreatedAt" value="#{personController.selected.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}" />
+                    
+                     <br />
+                <h:panelGroup />
+                <p:commandButton action="#{personController.create}" value="#{bundle.CreatePersonSaveLink}" update="panel"/>
+                <p:commandButton action="/provider/List?faces-redirect=true" value="Cancel" immediate="true"/>
+                <br />
+                    
                 </h:panelGrid>
-                <br />
-                <h:commandLink action="#{personController.create}" value="#{bundle.CreatePersonSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{personController.prepareList}" value="#{bundle.CreatePersonShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreatePersonIndexLink}"/>
+               
             </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

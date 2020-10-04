@@ -259,7 +259,7 @@ public class PersonController implements Serializable {
     }
 
     //------------edita un client -----------
-    public String editPerson(ActionEvent event){
+    public String editPerson(ActionEvent event, int tipoPerson){
         current = (Person) this.personTable.getRowData();
         //FacesMessage facesMessage = new FacesMessage("Se ha editado!! " + current.getIdPerson());
         
@@ -268,7 +268,13 @@ public class PersonController implements Serializable {
         //FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         //performDestroy();
         
-        return "/client/Edit";
+        if (tipoPerson == 1) {
+            return "/client/Edit";
+        }else if(tipoPerson == 2){
+            return "/provider/Edit";
+        }
+        
+        return "";
     }
     
     @PostConstruct
