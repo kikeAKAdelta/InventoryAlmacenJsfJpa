@@ -87,8 +87,15 @@ public class PersonController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public String create(int tipoPerson) {
         try {
+            current.setIdPerson(this.getMaxIdPerson());
+            if (tipoPerson==1) {
+                current.setKind(1);
+            }else if(tipoPerson == 2){
+                current.setKind(2);
+            }
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PersonCreated"));
             //cleanClientTxt();
@@ -213,6 +220,11 @@ public class PersonController implements Serializable {
         return ejbFacade.countPersonClient();
     }
     
+    //obtiene id maximo de persona
+    public Integer getMaxIdPerson(){
+        return ejbFacade.maxIdPerson()+1;
+    }
+    
     //Obtiene conteo de clientes
     public Object getCountPersonProvider(){
         return ejbFacade.countPersonProvider();
@@ -261,13 +273,7 @@ public class PersonController implements Serializable {
     //------------edita un client -----------
     public String editPerson(ActionEvent event, int tipoPerson){
         current = (Person) this.personTable.getRowData();
-        //FacesMessage facesMessage = new FacesMessage("Se ha editado!! " + current.getIdPerson());
-        
-        //facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-        
-        //FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-        //performDestroy();
-        
+                
         if (tipoPerson == 1) {
             return "/client/Edit";
         }else if(tipoPerson == 2){

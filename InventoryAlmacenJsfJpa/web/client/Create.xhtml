@@ -20,40 +20,47 @@
             <h:form class="clientForm form-group">
                 
                 <h:panelGrid id="panel" columns="2" class="clientGrid">
-                    <p:messages id="messages"/> <h:panelGroup/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_idPerson}" for="idPerson" />
-                    <p:inputText id="idPerson" value="#{personController.selected.idPerson}" title="#{bundle.CreatePersonTitle_idPerson}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_idPerson}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_name}" for="name" />
-                    <p:inputText id="name" value="#{personController.selected.name}" title="#{bundle.CreatePersonTitle_name}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_name}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_lastname}" for="lastname" />
-                    <p:inputText id="lastname" value="#{personController.selected.lastname}" title="#{bundle.CreatePersonTitle_lastname}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_lastname}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_company}" for="company" />
-                    <p:inputText id="company" value="#{personController.selected.company}" title="#{bundle.CreatePersonTitle_company}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_company}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_address1}" for="address1" />
-                    <p:inputText id="address1" value="#{personController.selected.address1}" title="#{bundle.CreatePersonTitle_address1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_address1}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_address2}" for="address2" />
-                    <p:inputText id="address2" value="#{personController.selected.address2}" title="#{bundle.CreatePersonTitle_address2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_address2}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_phone1}" for="phone1" />
-                    <p:inputText id="phone1" value="#{personController.selected.phone1}" title="#{bundle.CreatePersonTitle_phone1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_phone1}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_phone2}" for="phone2" />
-                    <p:inputText id="phone2" value="#{personController.selected.phone2}" title="#{bundle.CreatePersonTitle_phone2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_phone2}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_email1}" for="email1" />
-                    <p:inputText id="email1" value="#{personController.selected.email1}" title="#{bundle.CreatePersonTitle_email1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email1}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_email2}" for="email2" />
-                    <p:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.CreatePersonTitle_email2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email2}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_kind}" for="kind" />
-                    <p:inputText id="kind" value="#{personController.selected.kind}" title="#{bundle.CreatePersonTitle_kind}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_kind}"/>
-                    <!--<h:outputLabel value="# {bundle.CreatePersonLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="# {personController.selected.createdAt}" title="# {bundle.CreatePersonTitle_createdAt}" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>-->
                     
+                    <p:messages id="messages"/> <h:panelGroup/>
+                    <!--<h:outputLabel value="ID" for="idPerson" />
+                    <p:inputText id="idPerson" value="# {personController.selected.idPerson}" title="# {bundle.CreatePersonTitle_idPerson}" />
+                    -->
+                    <h:outputLabel value="Nombre" for="name" />
+                    <p:inputText id="name" value="#{personController.selected.name}" title="#{bundle.CreatePersonTitle_name}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_name}"/>
+                    
+                    <h:outputLabel value="Apellido" for="lastname" />
+                    <p:inputText id="lastname" value="#{personController.selected.lastname}" title="#{bundle.CreatePersonTitle_lastname}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_lastname}"/>
+                    
+                    <h:outputLabel value="Compañia" for="company" />
+                    <p:inputText id="company" value="#{personController.selected.company}" title="#{bundle.CreatePersonTitle_company}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_company}"/>
+                    
+                    <h:outputLabel value="Direccion" for="address1" />
+                    <p:inputText id="address1" value="#{personController.selected.address1}" title="#{bundle.CreatePersonTitle_address1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_address1}"/>
+                    
+                    <h:outputLabel value="Direccion 2" for="address2" />
+                    <p:inputText id="address2" value="#{personController.selected.address2}" title="#{bundle.CreatePersonTitle_address2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_address2}"/>
+                    
+                    <h:outputLabel value="Num Movil" for="phone1" />
+                    <p:inputText id="phone1" value="#{personController.selected.phone1}" title="#{bundle.CreatePersonTitle_phone1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_phone1}"/>
+                    
+                    <h:outputLabel value="Num Movil 2" for="phone2" />
+                    <p:inputText id="phone2" value="#{personController.selected.phone2}" title="#{bundle.CreatePersonTitle_phone2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_phone2}"/>
+                    
+                    <h:outputLabel value="Correo" for="email1" />
+                    <p:inputText id="email1" value="#{personController.selected.email1}" title="#{bundle.CreatePersonTitle_email1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email1}"/>
+                    
+                    <h:outputLabel value="Correo 2" for="email2" />
+                    <p:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.CreatePersonTitle_email2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email2}"/>
+                    
+                    <!--<h:outputLabel value="# {bundle.CreatePersonLabel_kind}" for="kind" />
+                    <p:inputText id="kind" value="# {personController.selected.kind}" title="# {bundle.CreatePersonTitle_kind}" />
+                    -->
                     <h:outputLabel value="Fecha de Creacion: " for="idCreatedAt" />
                     <p:calendar id="idCreatedAt" value="#{personController.selected.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}" />
                     
                     <br />
                 <h:panelGroup />
-                <p:commandButton action="#{personController.create}" value="#{bundle.CreatePersonSaveLink}" update="panel" />
+                <p:commandButton action="#{personController.create(1)}" value="#{bundle.CreatePersonSaveLink}" update="panel" />
                 <p:commandButton action="/client/List?faces-redirect=true" value="Cancel" immediate="true"/>
                 <br />
                 </h:panelGrid>

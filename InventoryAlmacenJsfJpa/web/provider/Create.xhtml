@@ -20,8 +20,7 @@
             <h:form class="clientForm form-group">
                 
                 <h:panelGrid columns="2" class="clientGrid" id="panel">
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_idPerson}" for="idPerson" />
-                    <h:inputText id="idPerson" value="#{personController.selected.idPerson}" title="#{bundle.CreatePersonTitle_idPerson}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_idPerson}"/>
+                    
                     <h:outputLabel value="#{bundle.CreatePersonLabel_name}" for="name" />
                     <h:inputText id="name" value="#{personController.selected.name}" title="#{bundle.CreatePersonTitle_name}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_name}"/>
                     <h:outputLabel value="#{bundle.CreatePersonLabel_lastname}" for="lastname" />
@@ -40,14 +39,12 @@
                     <h:inputText id="email1" value="#{personController.selected.email1}" title="#{bundle.CreatePersonTitle_email1}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email1}"/>
                     <h:outputLabel value="#{bundle.CreatePersonLabel_email2}" for="email2" />
                     <h:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.CreatePersonTitle_email2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email2}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonLabel_kind}" for="kind" />
-                    <h:inputText id="kind" value="#{personController.selected.kind}" title="#{bundle.CreatePersonTitle_kind}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_kind}"/>
-                   <h:outputLabel value="Fecha de Creacion: " for="idCreatedAt" />
+                    <h:outputLabel value="Fecha de Creacion: " for="idCreatedAt" />
                     <p:calendar id="idCreatedAt" value="#{personController.selected.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}" />
                     
                      <br />
                 <h:panelGroup />
-                <p:commandButton action="#{personController.create}" value="#{bundle.CreatePersonSaveLink}" update="panel"/>
+                <p:commandButton action="#{personController.create(2)}" value="#{bundle.CreatePersonSaveLink}" update="panel"/>
                 <p:commandButton action="/provider/List?faces-redirect=true" value="Cancel" immediate="true"/>
                 <br />
                     

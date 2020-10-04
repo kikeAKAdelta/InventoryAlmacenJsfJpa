@@ -96,6 +96,12 @@ public abstract class AbstractFacade<T> {
        return query.getResultList();
    }
    
+   public Integer maxIdPerson(){
+       Query query = getEntityManager().createQuery("SELECT max(e.idPerson) FROM Person e");
+       
+       return Integer.parseInt(query.getSingleResult().toString());
+   }
+   
    //-------------- fin metodos propios
     
 }
