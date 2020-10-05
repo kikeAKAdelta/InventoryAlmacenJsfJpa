@@ -50,19 +50,26 @@
 
 
             <!--Registro de Proveedores-->
-            <div class="container-md-6">
+            
                 <h1>Proveedores</h1>
                 <h:form class="clientForm form-group">
                     <h:panelGroup id="messagePanel" layout="block">
-                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table table-sm miTabla table-hover"/>
                     </h:panelGroup>
+                    
                     <h:outputText escape="false" value="#{bundle.ListPersonEmpty}" rendered="#{personController.items.rowCount == 0}"/>
                     <h:panelGroup rendered="#{personController.items.rowCount > 0}">
                         <h:outputText value="#{personController.pagination.pageFirstItem + 1}..#{personController.pagination.pageLastItem + 1}/#{personController.pagination.itemsCount}"/>&nbsp;
                         <h:commandLink action="#{personController.previous}" value="#{bundle.Previous} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasPreviousPage}"/>&nbsp;
                         <h:commandLink action="#{personController.next}" value="#{bundle.Next} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasNextPage}"/>&nbsp;
-
-                        <h:dataTable value="#{personController.personProvider}" var="item" binding="#{personController.personTable}" class="table table-striped">
+                        
+                       
+                        <h:dataTable value="#{personController.personProvider}" var="item" binding="#{personController.personTable}" class="table table-sm miTabla table-hover">
+                            <f:facet name="header">
+                                <h:outputText value="Registro de Proveedores"/>
+                                
+                            </f:facet>
+                            
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListPersonTitle_idPerson}"/>
@@ -151,11 +158,13 @@
                             </h:dataTable>
                     </h:panelGroup>
                     <br />
+                    <div class="container">
                     <h:commandButton value="Add" id="add" action="#{personController.prepareCreate}" class="btn btn-primary" />
+                    </div>
                     <br />
                     <br />
                 </h:form>
-            </div>
+            
         </ui:define>
     </ui:composition>
 

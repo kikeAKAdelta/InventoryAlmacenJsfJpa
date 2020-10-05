@@ -4,13 +4,18 @@ import com.entidades.Category;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.CategoryFacade;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -19,10 +24,11 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("categoryController")
-@SessionScoped
+@RequestScoped
 public class CategoryController implements Serializable {
 
     private Category current;
+    private UIData categoryTable;
     private DataModel items = null;
     @EJB
     private com.beans.CategoryFacade ejbFacade;
@@ -100,7 +106,7 @@ public class CategoryController implements Serializable {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CategoryUpdated"));
-            return "View";
+            return "List?faces-redirect=true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -191,6 +197,47 @@ public class CategoryController implements Serializable {
     public Category getCategory(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    /*------------Meodos propios Enrique------------------*/
+    
+    //------------edita un client -----------
+    public String editPerson(ActionEvent event){
+        current = (Category) this.categoryTable.getRowData();
+                
+        
+        return "/category/Edit";
+    }
+    
+     //-----------elimina a un cliente -------------
+    public void deletePerson(ActionEvent event){
+        current = (Category) this.categoryTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdCategory());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        performDestroy();
+    }
+    
+    //Inicializacion por defecto
+    @PostConstruct
+    public void init(){
+        this.current = new Category();
+    }
+
+    public UIData getCategoryTable() {
+        return categoryTable;
+    }
+
+    public void setCategoryTable(UIData categoryTable) {
+        this.categoryTable = categoryTable;
+    }
+    
+    
+    
+    
+    
+    /*---------------fin-------------------------*/
 
     @FacesConverter(forClass = Category.class)
     public static class CategoryControllerConverter implements Converter {

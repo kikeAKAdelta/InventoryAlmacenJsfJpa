@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -13,29 +14,33 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
+            
+            <div class="container">
+                <h:form class="clientForm formg-group">
+                    <h2>Editar Categoria</h2>
+                    <h:panelGrid columns="2" class="clientGrid">
+                    
                     <h:outputLabel value="#{bundle.EditCategoryLabel_idCategory}" for="idCategory" />
-                    <h:inputText id="idCategory" value="#{categoryController.selected.idCategory}" title="#{bundle.EditCategoryTitle_idCategory}" required="true" requiredMessage="#{bundle.EditCategoryRequiredMessage_idCategory}"/>
+                    <h:inputText id="idCategory" value="#{categoryController.selected.idCategory}" title="#{bundle.EditCategoryTitle_idCategory}" required="true" requiredMessage="#{bundle.EditCategoryRequiredMessage_idCategory}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditCategoryLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{categoryController.selected.name}" title="#{bundle.EditCategoryTitle_name}" required="true" requiredMessage="#{bundle.EditCategoryRequiredMessage_name}"/>
+                    <h:inputText id="name" value="#{categoryController.selected.name}" title="#{bundle.EditCategoryTitle_name}" required="true" requiredMessage="#{bundle.EditCategoryRequiredMessage_name}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditCategoryLabel_description}" for="description" />
-                    <h:inputText id="description" value="#{categoryController.selected.description}" title="#{bundle.EditCategoryTitle_description}" required="true" requiredMessage="#{bundle.EditCategoryRequiredMessage_description}"/>
-                    <h:outputLabel value="#{bundle.EditCategoryLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{categoryController.selected.createdAt}" title="#{bundle.EditCategoryTitle_createdAt}" required="true" requiredMessage="#{bundle.EditCategoryRequiredMessage_createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                    <h:inputText id="description" value="#{categoryController.selected.description}" title="#{bundle.EditCategoryTitle_description}" required="true" requiredMessage="#{bundle.EditCategoryRequiredMessage_description}" class="form-control"/>
+                    
+                    <h:outputLabel value="Fecha de Creacion: " for="idCreatedAt" />
+                    <p:calendar id="idCreatedAt" value="#{categoryController.selected.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}" />
+                    
+                    
+                    <h:panelGroup /> <h:panelGroup />
+                    <h:commandButton action="#{categoryController.update}" value="Editar" class="btn btn-primary"/>   
+                    <h:commandButton action="/category/List?faces-redirect=true" value="Cancelar" class="btn btn-danger" />
+                
                 </h:panelGrid>
-                <h:commandLink action="#{categoryController.update}" value="#{bundle.EditCategorySaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditCategoryViewLink}"/>
-                <br />
-                <h:commandLink action="#{categoryController.prepareList}" value="#{bundle.EditCategoryShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditCategoryIndexLink}" />
+                
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 

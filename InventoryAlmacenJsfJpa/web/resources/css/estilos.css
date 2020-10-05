@@ -7,7 +7,12 @@
 
 .clientForm .clientGrid{
     margin: auto;
-    
+}
+
+.clientForm .miTabla {
+    font-size: 16px;
+    margin: auto;
+    width: 300px;
 }
 
 .value {

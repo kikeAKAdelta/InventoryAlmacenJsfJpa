@@ -45,37 +45,50 @@
                         </p:menuitem>
                </p:tabMenu>
             </h:form>
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            
+            
+            <!-- table -->
+            
+            <div class="container">
+            <h:form class="form-group clientForm" id="formTable">
+                
+                <h:panelGroup id="messagePanel">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" id="messages"/>
                 </h:panelGroup>
+                
                 <h:outputText escape="false" value="#{bundle.ListCategoryEmpty}" rendered="#{categoryController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{categoryController.items.rowCount > 0}">
                     <h:outputText value="#{categoryController.pagination.pageFirstItem + 1}..#{categoryController.pagination.pageLastItem + 1}/#{categoryController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{categoryController.previous}" value="#{bundle.Previous} #{categoryController.pagination.pageSize}" rendered="#{categoryController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{categoryController.next}" value="#{bundle.Next} #{categoryController.pagination.pageSize}" rendered="#{categoryController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{categoryController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    
+                    <h:dataTable value="#{categoryController.items}" var="item" binding="#{categoryController.categoryTable}" class="table table-hover">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        <f:facet name="header">
+                                <h:outputText value="Registo de Categorias"/>
+                        </f:facet>
+                        
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_idCategory}"/>
+                                <h:outputText value="Id"/>
                             </f:facet>
                             <h:outputText value="#{item.idCategory}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_name}"/>
+                                <h:outputText value="Nombre"/>
                             </f:facet>
                             <h:outputText value="#{item.name}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_description}"/>
+                                <h:outputText value="Descripcion"/>
                             </f:facet>
                             <h:outputText value="#{item.description}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_createdAt}"/>
+                                <h:outputText value="Fecha de Creacion"/>
                             </f:facet>
                             <h:outputText value="#{item.createdAt}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -83,22 +96,23 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="Opciones"/>
                             </f:facet>
-                            <h:commandLink action="#{categoryController.prepareView}" value="#{bundle.ListCategoryViewLink}"/>
+                            
+                            <h:commandButton action="#{categoryController.editPerson(event)}" value="Editar" id="edit" class="btn btn-success" />
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{categoryController.prepareEdit}" value="#{bundle.ListCategoryEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{categoryController.destroy}" value="#{bundle.ListCategoryDestroyLink}"/>
-                        </h:column>
+                            <h:commandButton action="#{categoryController.deletePerson(event)}" value="#{bundle.ListPersonDestroyLink}" id="delete" class="btn btn-danger" />
+
+                           </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
-                <p:commandButton value="Add" id="add" action="#{categoryController.prepareCreate}" style="margin-right:20px;" styleClass="ui-priority-primary" />
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListCategoryIndexLink}"/>
+               <div class="container">
+                    <h:commandButton value="Add" id="add" action="/category/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
+                    </div>
+                
             </h:form>
+                </div>
+                
         </ui:define>
     </ui:composition>
 

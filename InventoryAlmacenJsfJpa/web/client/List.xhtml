@@ -15,7 +15,7 @@
             <!--Menu de navegacion-->
             
             <h:form>
-                <div class="row">
+                
                 <p:tabMenu activeIndex="#{param.i}" >
                     <p:menuitem value="Home" outcome="/index" icon="ui-icon-star" styleClass="ui-menuitem">
                         <f:param name="i" value="0" />
@@ -48,26 +48,28 @@
                         <f:param name="i" value="9" />
                     </p:menuitem>
                 </p:tabMenu>
-                    </div>
-            </h:form>
+                  
+            </h:form> 
                 
              
 
             <!--Tabla de Clientes-->
-            <div class="container-md-6">
+            
             <h1>Clientes</h1>
             
-                <h:form class="form-group" >
+                <h:form class="form-group clientForm" >
+                    
                     <h:panelGroup id="messagePanel">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" id="messages"/>
                     </h:panelGroup>
+                    
                     <h:outputText escape="false" value="#{bundle.ListPersonEmpty}" rendered="#{personController.items.rowCount == 0}"/>
                     <h:panelGroup rendered="#{personController.items.rowCount > 0}">
                         <h:outputText value="#{personController.pagination.pageFirstItem + 1}..#{personController.pagination.pageLastItem + 1}/#{personController.pagination.itemsCount}"/>&nbsp;
                         <h:commandLink action="#{personController.previous}" value="#{bundle.Previous} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasPreviousPage}"/>&nbsp;
                         <h:commandLink action="#{personController.next}" value="#{bundle.Next} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasNextPage}"/>&nbsp;
                         
-                        <h:dataTable value="#{personController.personClients}" var="item" binding="#{personController.personTable}" class="table table-striped" >
+                        <h:dataTable value="#{personController.personClients}" var="item" binding="#{personController.personTable}" class="table table-sm miTabla table-hover" >
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                             <f:facet name="header">
                                 <h:outputText value="Registro de Clientes"/>
@@ -153,14 +155,17 @@
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
+                        
                             
                     </h:panelGroup>
                     <br />
+                    <div class="container">
                     <h:commandButton value="Add" id="add" action="/client/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
+                    </div>
                     <br />
                     <br />
                 </h:form>
-            </div>
+            
         </ui:define>
     </ui:composition>
 
