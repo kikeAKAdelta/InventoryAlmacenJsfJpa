@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -13,41 +14,43 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
+            
+            <div class="container">
+                <h1>Editar Usuario</h1>
+                <h:form class="form-group clientForm">
+                    
+                    <h:panelGrid columns="2" class="clientGrid">
+                    
                     <h:outputLabel value="#{bundle.EditUserLabel_idUser}" for="idUser" />
-                    <h:inputText id="idUser" value="#{userController.selected.idUser}" title="#{bundle.EditUserTitle_idUser}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_idUser}"/>
+                    <h:inputText id="idUser" value="#{userController.selected.idUser}" title="#{bundle.EditUserTitle_idUser}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_idUser}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{userController.selected.name}" title="#{bundle.EditUserTitle_name}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_name}"/>
+                    <h:inputText id="name" value="#{userController.selected.name}" title="#{bundle.EditUserTitle_name}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_name}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_lastname}" for="lastname" />
-                    <h:inputText id="lastname" value="#{userController.selected.lastname}" title="#{bundle.EditUserTitle_lastname}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_lastname}"/>
+                    <h:inputText id="lastname" value="#{userController.selected.lastname}" title="#{bundle.EditUserTitle_lastname}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_lastname}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_username}" for="username" />
-                    <h:inputText id="username" value="#{userController.selected.username}" title="#{bundle.EditUserTitle_username}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_username}"/>
+                    <h:inputText id="username" value="#{userController.selected.username}" title="#{bundle.EditUserTitle_username}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_username}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{userController.selected.email}" title="#{bundle.EditUserTitle_email}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_email}"/>
+                    <h:inputText id="email" value="#{userController.selected.email}" title="#{bundle.EditUserTitle_email}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_email}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_password}" for="password" />
-                    <h:inputText id="password" value="#{userController.selected.password}" title="#{bundle.EditUserTitle_password}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_password}"/>
+                    <h:inputText id="password" value="#{userController.selected.password}" title="#{bundle.EditUserTitle_password}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_password}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_image}" for="image" />
-                    <h:inputText id="image" value="#{userController.selected.image}" title="#{bundle.EditUserTitle_image}" />
+                    <h:inputText id="image" value="#{userController.selected.image}" title="#{bundle.EditUserTitle_image}" class="form-control" />
                     <h:outputLabel value="#{bundle.EditUserLabel_isActive}" for="isActive" />
-                    <h:inputText id="isActive" value="#{userController.selected.isActive}" title="#{bundle.EditUserTitle_isActive}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_isActive}"/>
+                    <h:inputText id="isActive" value="#{userController.selected.isActive}" title="#{bundle.EditUserTitle_isActive}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_isActive}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_isAdmin}" for="isAdmin" />
-                    <h:inputText id="isAdmin" value="#{userController.selected.isAdmin}" title="#{bundle.EditUserTitle_isAdmin}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_isAdmin}"/>
+                    <h:inputText id="isAdmin" value="#{userController.selected.isAdmin}" title="#{bundle.EditUserTitle_isAdmin}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_isAdmin}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditUserLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{userController.selected.createdAt}" title="#{bundle.EditUserTitle_createdAt}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                    <p:calendar id="idCreatedAt" value="#{userController.current.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreateUserRequiredMessage_createdAt}" />
+                    
+                    
+                    <h:outputLabel /> <h:outputLabel />
+                    <h:commandButton action="#{userController.update}" value="Editar" class="btn btn-primary"/>   
+                    <h:commandButton action="/user/List?faces-redirect=true" value="Cancelar" class="btn btn-danger" />
+                
                 </h:panelGrid>
-                <h:commandLink action="#{userController.update}" value="#{bundle.EditUserSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditUserViewLink}"/>
-                <br />
-                <h:commandLink action="#{userController.prepareList}" value="#{bundle.EditUserShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditUserIndexLink}" />
+                
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 

@@ -21,10 +21,6 @@
                 
                 <h:panelGrid id="panel" columns="2" class="clientGrid">
                     
-                    <p:messages id="messages"/> <h:panelGroup/>
-                    <!--<h:outputLabel value="ID" for="idPerson" />
-                    <p:inputText id="idPerson" value="# {personController.selected.idPerson}" title="# {bundle.CreatePersonTitle_idPerson}" />
-                    -->
                     <h:outputLabel value="Nombre" for="name" />
                     <p:inputText id="name" value="#{personController.selected.name}" title="#{bundle.CreatePersonTitle_name}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_name}"/>
                     
@@ -52,16 +48,13 @@
                     <h:outputLabel value="Correo 2" for="email2" />
                     <p:inputText id="email2" value="#{personController.selected.email2}" title="#{bundle.CreatePersonTitle_email2}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_email2}"/>
                     
-                    <!--<h:outputLabel value="# {bundle.CreatePersonLabel_kind}" for="kind" />
-                    <p:inputText id="kind" value="# {personController.selected.kind}" title="# {bundle.CreatePersonTitle_kind}" />
-                    -->
                     <h:outputLabel value="Fecha de Creacion: " for="idCreatedAt" />
                     <p:calendar id="idCreatedAt" value="#{personController.selected.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}" />
                     
                     <br />
                 <h:panelGroup />
-                <p:commandButton action="#{personController.create(1)}" value="#{bundle.CreatePersonSaveLink}" update="panel" />
-                <p:commandButton action="/client/List?faces-redirect=true" value="Cancel" immediate="true"/>
+                <h:commandButton action="#{personController.create(1)}" value="#{bundle.CreatePersonSaveLink}" class="btn btn-success" />
+                <h:commandButton action="/client/List?faces-redirect=true" value="Cancel" immediate="true" class="btn btn-danger"/>
                 <br />
                 </h:panelGrid>
                 

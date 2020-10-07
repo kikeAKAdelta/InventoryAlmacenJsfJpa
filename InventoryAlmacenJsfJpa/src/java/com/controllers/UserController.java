@@ -214,7 +214,7 @@ public class UserController implements Serializable {
     
 
     //------------edita un clienta -----------
-    public String editPerson(ActionEvent event){
+    public String editUser(ActionEvent event){
         current = (User) this.userTable.getRowData();   
         
         return "/user/Edit";

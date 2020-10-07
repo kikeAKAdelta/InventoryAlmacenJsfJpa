@@ -47,10 +47,11 @@
                         </p:menuitem>
                </p:tabMenu>
                 
-                
+            </h:form>
+            
             <!--Formulario con tabla-->   
             <h1>Usuarios</h1>
-            </h:form>
+            <div class="container">
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -134,7 +135,7 @@
                                 <h:outputText value="Opciones"/>
                             </f:facet>
                             
-                            <h:commandButton action="#{userController.editPerson(event)}" value="Editar" id="edit" class="btn btn-success" />
+                            <h:commandButton action="#{userController.editUser(event)}" value="Editar" id="edit" class="btn btn-success" />
                             <h:outputText value=" "/>
                             <h:commandButton action="#{userController.deletePerson(event)}" value="#{bundle.ListUserDestroyLink}" id="delete" class="btn btn-danger" />
 
@@ -149,6 +150,7 @@
                     <br />
                 
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 

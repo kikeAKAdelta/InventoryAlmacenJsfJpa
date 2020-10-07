@@ -17,14 +17,14 @@
             <h1>Crear Categoria</h1>
             
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:messages />
             </h:panelGroup>
             
             <h:form class="clientForm form-group">
                 
                 <h:panelGrid columns="2" class="clientGrid" id="panel">
                     
-                    <p:messages id="messages" /><h:panelGroup />
+                    
                     
                     <h:outputLabel value="ID" for="idCategory" />
                     <h:inputText id="idCategory" value="#{categoryController.selected.idCategory}" title="#{bundle.CreateCategoryTitle_idCategory}" required="true" requiredMessage="#{bundle.CreateCategoryRequiredMessage_idCategory}"/>
@@ -38,10 +38,10 @@
                     <h:outputLabel value="Fecha de Creacion: " for="idCreatedAt" />
                     <p:calendar id="idCreatedAt" value="#{categoryController.selected.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_createdAt}" />
                   
-                    <h:panelGroup />
                     
-                    <p:commandButton action="#{categoryController.create}" value="Crear" update="panel"  />
-                    <p:commandButton action="/category/List?faces-redirect=true" value="Cancel" immediate="true"/>
+                    
+                    <h:commandButton action="#{categoryController.create}" value="Crear" class="btn btn-success" />
+                    <h:commandButton action="/category/List?faces-redirect=true" value="Cancel" immediate="true" class="btn btn-danger"/>
                 
                     <br />
                     

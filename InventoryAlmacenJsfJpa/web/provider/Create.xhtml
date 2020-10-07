@@ -14,7 +14,7 @@
             <div class="container">
             <h1>Agregar Proveedor</h1>
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:messages />
             </h:panelGroup>
             
             <h:form class="clientForm form-group">
@@ -44,8 +44,8 @@
                     
                      <br />
                 <h:panelGroup />
-                <p:commandButton action="#{personController.create(2)}" value="#{bundle.CreatePersonSaveLink}" update="panel"/>
-                <p:commandButton action="/provider/List?faces-redirect=true" value="Cancel" immediate="true"/>
+                <h:commandButton action="#{personController.create(2)}" value="#{bundle.CreatePersonSaveLink}" class="btn btn-success" />
+                <h:commandButton action="/provider/List?faces-redirect=true" value="Cancel" immediate="true" class="btn btn-danger"/>
                 <br />
                     
                 </h:panelGrid>
