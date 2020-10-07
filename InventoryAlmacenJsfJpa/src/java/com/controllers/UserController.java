@@ -4,13 +4,17 @@ import com.entidades.User;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.UserFacade;
-
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -19,10 +23,11 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("userController")
-@SessionScoped
+@RequestScoped
 public class UserController implements Serializable {
 
     private User current;
+    private UIData userTable;
     private DataModel items = null;
     @EJB
     private com.beans.UserFacade ejbFacade;
@@ -191,6 +196,58 @@ public class UserController implements Serializable {
     public User getUser(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    /*----------------------------Metodos Propios Enrique------------------------*/
+    
+    
+    
+    //-------eliminar un usuario-------------
+    public void deletePerson(ActionEvent event){
+        current = (User) this.userTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdUser());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        performDestroy();
+    }
+    
+
+    //------------edita un clienta -----------
+    public String editPerson(ActionEvent event){
+        current = (User) this.userTable.getRowData();   
+        
+        return "/user/Edit";
+        
+    }
+    
+    @PostConstruct
+    public void init(){
+        this.current = new User();
+    }
+
+    public User getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(User current) {
+        this.current = current;
+    }
+
+    public UIData getUserTable() {
+        return userTable;
+    }
+
+    public void setUserTable(UIData userTable) {
+        this.userTable = userTable;
+    }
+    
+    
+    
+    
+    
+    
+    /*-------------------fin---------------------------*/
 
     @FacesConverter(forClass = User.class)
     public static class UserControllerConverter implements Converter {

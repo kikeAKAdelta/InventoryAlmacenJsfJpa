@@ -17,36 +17,52 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateProductLabel_idProduct}" for="idProduct" />
                     <h:inputText id="idProduct" value="#{productController.selected.idProduct}" title="#{bundle.CreateProductTitle_idProduct}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_idProduct}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_barcode}" for="barcode" />
                     <h:inputText id="barcode" value="#{productController.selected.barcode}" title="#{bundle.CreateProductTitle_barcode}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_barcode}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_name}" for="name" />
                     <h:inputText id="name" value="#{productController.selected.name}" title="#{bundle.CreateProductTitle_name}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_name}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_description}" for="description" />
                     <h:inputText id="description" value="#{productController.selected.description}" title="#{bundle.CreateProductTitle_description}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_description}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_inventaryMin}" for="inventaryMin" />
                     <h:inputText id="inventaryMin" value="#{productController.selected.inventaryMin}" title="#{bundle.CreateProductTitle_inventaryMin}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_inventaryMin}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_priceIn}" for="priceIn" />
                     <h:inputText id="priceIn" value="#{productController.selected.priceIn}" title="#{bundle.CreateProductTitle_priceIn}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_priceIn}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_priceOut}" for="priceOut" />
                     <h:inputText id="priceOut" value="#{productController.selected.priceOut}" title="#{bundle.CreateProductTitle_priceOut}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_priceOut}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_unit}" for="unit" />
                     <h:inputText id="unit" value="#{productController.selected.unit}" title="#{bundle.CreateProductTitle_unit}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_unit}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_presentation}" for="presentation" />
                     <h:inputText id="presentation" value="#{productController.selected.presentation}" title="#{bundle.CreateProductTitle_presentation}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_presentation}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_createdAt}" for="createdAt" />
                     <h:inputText id="createdAt" value="#{productController.selected.createdAt}" title="#{bundle.CreateProductTitle_createdAt}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_createdAt}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_isActive}" for="isActive" />
                     <h:inputText id="isActive" value="#{productController.selected.isActive}" title="#{bundle.CreateProductTitle_isActive}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_isActive}"/>
+                    
+                    <!--Para que aparezca descriptible el id hay que modificar el toString() del entiti de category-->
                     <h:outputLabel value="#{bundle.CreateProductLabel_idCategory}" for="idCategory" />
                     <h:selectOneMenu id="idCategory" value="#{productController.selected.idCategory}" title="#{bundle.CreateProductTitle_idCategory}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_idCategory}">
-                        <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{categoryController.itemsAvailableSelectOne}" />
                     </h:selectOneMenu>
+                    
                     <h:outputLabel value="#{bundle.CreateProductLabel_idUser}" for="idUser" />
                     <h:selectOneMenu id="idUser" value="#{productController.selected.idUser}" title="#{bundle.CreateProductTitle_idUser}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_idUser}">
-                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}" />
                     </h:selectOneMenu>
+                    
+                    
+                
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{productController.create}" value="#{bundle.CreateProductSaveLink}" />

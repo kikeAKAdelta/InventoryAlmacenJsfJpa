@@ -7,12 +7,12 @@ import com.beans.CategoryFacade;
 import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
@@ -199,6 +199,12 @@ public class CategoryController implements Serializable {
     }
     
     /*------------Meodos propios Enrique------------------*/
+    
+    
+    //-------devuelve una lista de categoria------
+    public List<Category> getListaCategoria(){
+        return ejbFacade.findAll();
+    }
     
     //------------edita un client -----------
     public String editPerson(ActionEvent event){
