@@ -4,13 +4,18 @@ import com.entidades.Product;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.ProductFacade;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -19,11 +24,12 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("productController")
-@SessionScoped
+@RequestScoped
 public class ProductController implements Serializable {
 
     private Product current;
     private DataModel items = null;
+    private UIData productTable;
     @EJB
     private com.beans.ProductFacade ejbFacade;
     private PaginationHelper pagination;
@@ -100,7 +106,7 @@ public class ProductController implements Serializable {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProductUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -191,6 +197,67 @@ public class ProductController implements Serializable {
     public Product getProduct(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    /*-----------Metodos propios Enrique-----------*/
+    
+    //Eliminar un producto
+    public void deleteProduct(ActionEvent event){
+        current = (Product) this.productTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdProduct());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        performDestroy();
+    }
+
+    //------------edita un client -----------
+    public String editProduct(ActionEvent event){
+        current = (Product) this.productTable.getRowData();
+        
+        return "/product/Edit";
+    }
+    
+    //-----------elimina a un cliente -------------
+    public void deletePerson(ActionEvent event){
+        current = (Product) this.productTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdProduct());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        performDestroy();
+    }
+    
+    @PostConstruct
+    public void init(){
+        this.current = new Product();
+    }
+
+    public Product getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Product current) {
+        this.current = current;
+    }
+
+    public UIData getProductTable() {
+        return productTable;
+    }
+
+    public void setProductTable(UIData productTable) {
+        this.productTable = productTable;
+    }
+    
+    
+    
+    
+    
+    
+    /*--------------fin------------------*/
+    
+    
 
     @FacesConverter(forClass = Product.class)
     public static class ProductControllerConverter implements Converter {

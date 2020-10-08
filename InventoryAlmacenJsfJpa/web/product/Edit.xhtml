@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -11,53 +12,67 @@
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:messages />
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditProductLabel_idProduct}" for="idProduct" />
-                    <h:inputText id="idProduct" value="#{productController.selected.idProduct}" title="#{bundle.EditProductTitle_idProduct}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_idProduct}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_barcode}" for="barcode" />
-                    <h:inputText id="barcode" value="#{productController.selected.barcode}" title="#{bundle.EditProductTitle_barcode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_barcode}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{productController.selected.name}" title="#{bundle.EditProductTitle_name}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_name}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_description}" for="description" />
-                    <h:inputText id="description" value="#{productController.selected.description}" title="#{bundle.EditProductTitle_description}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_description}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_inventaryMin}" for="inventaryMin" />
-                    <h:inputText id="inventaryMin" value="#{productController.selected.inventaryMin}" title="#{bundle.EditProductTitle_inventaryMin}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_inventaryMin}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_priceIn}" for="priceIn" />
-                    <h:inputText id="priceIn" value="#{productController.selected.priceIn}" title="#{bundle.EditProductTitle_priceIn}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_priceIn}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_priceOut}" for="priceOut" />
-                    <h:inputText id="priceOut" value="#{productController.selected.priceOut}" title="#{bundle.EditProductTitle_priceOut}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_priceOut}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_unit}" for="unit" />
-                    <h:inputText id="unit" value="#{productController.selected.unit}" title="#{bundle.EditProductTitle_unit}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_unit}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_presentation}" for="presentation" />
-                    <h:inputText id="presentation" value="#{productController.selected.presentation}" title="#{bundle.EditProductTitle_presentation}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_presentation}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{productController.selected.createdAt}" title="#{bundle.EditProductTitle_createdAt}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.EditProductLabel_isActive}" for="isActive" />
-                    <h:inputText id="isActive" value="#{productController.selected.isActive}" title="#{bundle.EditProductTitle_isActive}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_isActive}"/>
-                    <h:outputLabel value="#{bundle.EditProductLabel_idCategory}" for="idCategory" />
-                    <h:selectOneMenu id="idCategory" value="#{productController.selected.idCategory}" title="#{bundle.EditProductTitle_idCategory}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_idCategory}">
+            
+            <div class="container">
+                <h:form class="form-group clientForm">
+                    
+                    <h:panelGrid columns="2" class="clientGrid">
+                    
+                    <h:outputLabel value="Id" for="idProduct" />
+                    <h:inputText id="idProduct" value="#{productController.current.idProduct}" title="#{bundle.EditProductTitle_idProduct}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_idProduct}" class="form-control"/>
+                    
+                    <h:outputLabel value="Codigo de Barra" for="barcode" />
+                    <h:inputText id="barcode" value="#{productController.current.barcode}" title="#{bundle.EditProductTitle_barcode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_barcode}" class="form-control"/>
+                    
+                    <h:outputLabel value="Nombre" for="name" />
+                    <h:inputText id="name" value="#{productController.current.name}" title="#{bundle.EditProductTitle_name}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_name}" class="form-control"/>
+                    
+                    <h:outputLabel value="Descripcion" for="description" />
+                    <h:inputText id="description" value="#{productController.current.description}" title="#{bundle.EditProductTitle_description}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_description}" class="form-control"/>
+                    
+                    <h:outputLabel value="Inventario Minimo" for="inventaryMin" />
+                    <h:inputText id="inventaryMin" value="#{productController.current.inventaryMin}" title="#{bundle.EditProductTitle_inventaryMin}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_inventaryMin}" class="form-control"/>
+                    
+                    <h:outputLabel value="Precio de Entrada" for="priceIn" />
+                    <h:inputText id="priceIn" value="#{productController.current.priceIn}" title="#{bundle.EditProductTitle_priceIn}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_priceIn}" class="form-control"/>
+                    
+                    <h:outputLabel value="Precio de Salida" for="priceOut" />
+                    <h:inputText id="priceOut" value="#{productController.current.priceOut}" title="#{bundle.EditProductTitle_priceOut}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_priceOut}" class="form-control"/>
+                    
+                    <h:outputLabel value="Unidad" for="unit" />
+                    <h:inputText id="unit" value="#{productController.current.unit}" title="#{bundle.EditProductTitle_unit}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_unit}" class="form-control"/>
+                    
+                    <h:outputLabel value="Presentacion" for="presentation" />
+                    <h:inputText id="presentation" value="#{productController.current.presentation}" title="#{bundle.EditProductTitle_presentation}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_presentation}" class="form-control"/>
+                    
+                    <h:outputLabel value="Fecha de Creacion" for="createdAt" />
+                    <p:calendar id="idCreatedAt" value="#{productController.current.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}" class="form-group" />
+                    
+                    
+                    <h:outputLabel value="Activo" for="isActive" />
+                    <h:inputText id="isActive" value="#{productController.current.isActive}" title="#{bundle.EditProductTitle_isActive}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_isActive}" class="form-control"/>
+                    
+                    <h:outputLabel value="Categoria" for="idCategory" />
+                    <h:selectOneMenu id="idCategory" value="#{productController.current.idCategory}" title="#{bundle.EditProductTitle_idCategory}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_idCategory}" class="form-control">
                         <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditProductLabel_idUser}" for="idUser" />
-                    <h:selectOneMenu id="idUser" value="#{productController.selected.idUser}" title="#{bundle.EditProductTitle_idUser}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_idUser}">
+                    
+                    <h:outputLabel value="Usuario" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{productController.current.idUser}" title="#{bundle.EditProductTitle_idUser}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_idUser}" class="form-control">
                         <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    
+                    <h:panelGroup /> <h:panelGroup />
+                    <h:commandButton action="#{productController.update}" value="Editar" class="btn btn-primary"/>   
+                    <h:commandButton action="/product/List?faces-redirect=true" value="Cancelar" class="btn btn-danger" />
+                
+                    
                 </h:panelGrid>
-                <h:commandLink action="#{productController.update}" value="#{bundle.EditProductSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditProductViewLink}"/>
-                <br />
-                <h:commandLink action="#{productController.prepareList}" value="#{bundle.EditProductShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditProductIndexLink}" />
+                
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 

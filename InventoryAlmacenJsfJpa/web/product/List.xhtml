@@ -46,19 +46,30 @@
                         </p:menuitem>
                </p:tabMenu>
             </h:form>
-            <h:form styleClass="jsfcrud_list_form">
+            
+            
+            <!--Formulario de Tabla-->
+            <div class="container">
+            <h:form class="clientForm form-group" >
+                
                 <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    <p:messages />
                 </h:panelGroup>
+                
                 <h:outputText escape="false" value="#{bundle.ListProductEmpty}" rendered="#{productController.items.rowCount == 0}"/>
+                
                 <h:panelGroup rendered="#{productController.items.rowCount > 0}">
                     <h:outputText value="#{productController.pagination.pageFirstItem + 1}..#{productController.pagination.pageLastItem + 1}/#{productController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{productController.previous}" value="#{bundle.Previous} #{productController.pagination.pageSize}" rendered="#{productController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{productController.next}" value="#{bundle.Next} #{productController.pagination.pageSize}" rendered="#{productController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{productController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    
+                    <h:dataTable value="#{productController.items}" var="item" binding="#{productController.productTable}" class="table table-hover table-sm">
+                        <f:facet name="header">
+                                <h:outputText value="Registro de Productos"/>
+                        </f:facet>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_idProduct}"/>
+                                <h:outputText value="Id"/>
                             </f:facet>
                             <h:outputText value="#{item.idProduct}"/>
                         </h:column>
@@ -70,31 +81,31 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_name}"/>
+                                <h:outputText value="Nombre"/>
                             </f:facet>
                             <h:outputText value="#{item.name}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_description}"/>
+                                <h:outputText value="Descripcion"/>
                             </f:facet>
                             <h:outputText value="#{item.description}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_inventaryMin}"/>
+                                <h:outputText value="Inventario Min"/>
                             </f:facet>
                             <h:outputText value="#{item.inventaryMin}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_priceIn}"/>
+                                <h:outputText value="Precio In"/>
                             </f:facet>
                             <h:outputText value="#{item.priceIn}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_priceOut}"/>
+                                <h:outputText value="Precio Out"/>
                             </f:facet>
                             <h:outputText value="#{item.priceOut}"/>
                         </h:column>
@@ -106,13 +117,13 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_presentation}"/>
+                                <h:outputText value="Presentacion"/>
                             </f:facet>
                             <h:outputText value="#{item.presentation}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_createdAt}"/>
+                                <h:outputText value="Fecha Creacion"/>
                             </f:facet>
                             <h:outputText value="#{item.createdAt}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -120,40 +131,42 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_isActive}"/>
+                                <h:outputText value="Activo"/>
                             </f:facet>
                             <h:outputText value="#{item.isActive}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_idCategory}"/>
+                                <h:outputText value="Categoria"/>
                             </f:facet>
                             <h:outputText value="#{item.idCategory}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductTitle_idUser}"/>
+                                <h:outputText value="Usuario"/>
                             </f:facet>
                             <h:outputText value="#{item.idUser}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="Opciones"/>
                             </f:facet>
-                            <h:commandLink action="#{productController.prepareView}" value="#{bundle.ListProductViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{productController.prepareEdit}" value="#{bundle.ListProductEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{productController.destroy}" value="#{bundle.ListProductDestroyLink}"/>
+                            <h:commandButton action="#{productController.editProduct(event)}" value="Editar" id="edit" class="btn btn-success" />
+                                <h:outputText value=" "/>
+                                <h:commandButton action="#{productController.deleteProduct(event)}" value="#{bundle.ListProductDestroyLink}" id="delete" class="btn btn-danger" >
+                                    
+                                </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <p:commandButton value="Add" id="add" action="#{productController.prepareCreate}" style="margin-right:20px;" styleClass="ui-priority-primary" />
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListProductIndexLink}"/>
+                <div class="container">
+                    <h:commandButton value="Add" id="add" action="/product/Create?faces-redirect=true" class="btn btn-primary" />
+                    </div>
+                    <br />
+                    <br />
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 
