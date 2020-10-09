@@ -4,168 +4,178 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      >
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListPersonTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            
+
             <!--Menu de navegacion-->
-            
-            <h:form>
-                
-                <p:tabMenu activeIndex="#{param.i}" >
-                    <p:menuitem value="Home" outcome="/index" icon="ui-icon-star" styleClass="ui-menuitem">
-                        <f:param name="i" value="0" />
-                    </p:menuitem>
-                    <p:menuitem value="Proveedores" outcome="/provider/List" icon="ui-icon-star">
-                        <f:param name="i" value="1" />
-                    </p:menuitem>
-                    <p:menuitem value="Clientes" outcome="/client/List" icon="ui-icon-star">
-                        <f:param name="i" value="2" />
-                    </p:menuitem>
-                    <p:menuitem value="Productos" outcome="/product/List" icon="ui-icon-star">
-                        <f:param name="i" value="3" />
-                    </p:menuitem>
-                    <p:menuitem value="Categoria" outcome="/category/List" icon="ui-icon-star">
-                        <f:param name="i" value="4" />
-                    </p:menuitem>
-                    <p:menuitem value="Tipo de Producto" outcome="/productType/List" icon="ui-icon-star">
-                        <f:param name="i" value="5" />
-                    </p:menuitem>
-                    <p:menuitem value="Compra/Venta" outcome="/sell/List" icon="ui-icon-star">
-                        <f:param name="i" value="6" />
-                    </p:menuitem>
-                    <p:menuitem value="Usuarios" outcome="/user/List" icon="ui-icon-star">
-                        <f:param name="i" value="7" />
-                    </p:menuitem>
-                    <p:menuitem value="Corte de Caja" outcome="/box/List" icon="ui-icon-star">
-                        <f:param name="i" value="8" />
-                    </p:menuitem>
-                    <p:menuitem value="Operacion" outcome="/operation/List" icon="ui-icon-star">
-                        <f:param name="i" value="9" />
-                    </p:menuitem>
-                </p:tabMenu>
-                  
-            </h:form> 
-                
-             
-
-            <!--Tabla de Clientes-->
-            
-            <h1>Clientes</h1>
-            
-                <h:form class="form-group clientForm" >
+            <div class="container-fluid">
+                <div class="row">
                     
-                    <h:panelGroup id="messagePanel">
-                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" id="messages"/>
-                    </h:panelGroup>
-                    
-                    <h:outputText escape="false" value="#{bundle.ListPersonEmpty}" rendered="#{personController.items.rowCount == 0}"/>
-                    <h:panelGroup rendered="#{personController.items.rowCount > 0}">
-                        <h:outputText value="#{personController.pagination.pageFirstItem + 1}..#{personController.pagination.pageLastItem + 1}/#{personController.pagination.itemsCount}"/>&nbsp;
-                        <h:commandLink action="#{personController.previous}" value="#{bundle.Previous} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasPreviousPage}"/>&nbsp;
-                        <h:commandLink action="#{personController.next}" value="#{bundle.Next} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasNextPage}"/>&nbsp;
-                        
-                        <h:dataTable value="#{personController.personClients}" var="item" binding="#{personController.personTable}" class="table table-sm miTabla table-hover" >
-                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                            <f:facet name="header">
-                                <h:outputText value="Registro de Clientes"/>
-                            </f:facet>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
-                                <h:outputText value="#{item.idPerson}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nombre"/>
-                                </f:facet>
-                                <h:outputText value="#{item.name}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Apellido"/>
-                                </f:facet>
-                                <h:outputText value="#{item.lastname}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Compañia"/>
-                                </f:facet>
-                                <h:outputText value="#{item.company}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Direccion"/>
-                                </f:facet>
-                                <h:outputText value="#{item.address1}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Direccion 2"/>
-                                </f:facet>
-                                <h:outputText value="#{item.address2}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Num Movil"/>
-                                </f:facet>
-                                <h:outputText value="#{item.phone1}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Num Movil 2"/>
-                                </f:facet>
-                                <h:outputText value="#{item.phone2}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Email 1"/>
-                                </f:facet>
-                                <h:outputText value="#{item.email1}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Email 2"/>
-                                </f:facet>
-                                <h:outputText value="#{item.email2}"/>
-                            </h:column>
-                            
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Fecha de Creacion"/>
-                                </f:facet>
-                                <h:outputText value="#{item.createdAt}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Opciones"/>
-                                </f:facet>
+                    <div class="col-2">
+                        <ul class="nav flex-column " >
+                                
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/index.xhtml">Home</a>
+                                </li>
 
-                                <h:commandButton action="#{personController.editPerson(event,1)}" value="Editar" id="edit" class="btn btn-success" />
-                                <h:outputText value=" "/>
-                                <h:commandButton action="#{personController.deletePerson(event)}" value="#{bundle.ListPersonDestroyLink}" id="delete" class="btn btn-danger" >
-                                    
-                                </h:commandButton>
-                            </h:column>
-                        </h:dataTable>
-                        
-                            
-                    </h:panelGroup>
-                    <br />
-                    <div class="container">
-                    <h:commandButton value="Add" id="add" action="/client/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
+                                <li class="nav-item">
+                                    <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/provider/List.xhtml">Proveedores</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/client/List.xhtml">Clientes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/product/List.xhtml">Productos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/category/List.xhtml">Categoria</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/productType/List.xhtml">Tipo De Producto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/sell/List.xhtml">Compra/Venta</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/user/List.xhtml">Usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/box/List.xhtml">Corte de Caja</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operation/List.xhtml">Operacion</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                                </li>
+                            </ul>
                     </div>
-                    <br />
-                    <br />
-                </h:form>
-            
+
+
+
+                    <!--Tabla de Clientes-->
+                    <div class="col-2">
+                        
+                    <h1>Clientes</h1>
+
+                    <h:form class="form-group " >
+
+                        <h:panelGroup id="messagePanel">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" id="messages"/>
+                        </h:panelGroup>
+
+                        <h:outputText escape="false" value="#{bundle.ListPersonEmpty}" rendered="#{personController.items.rowCount == 0}"/>
+                        <h:panelGroup rendered="#{personController.items.rowCount > 0}">
+                            <h:outputText value="#{personController.pagination.pageFirstItem + 1}..#{personController.pagination.pageLastItem + 1}/#{personController.pagination.itemsCount}"/>&nbsp;
+                            <h:commandLink action="#{personController.previous}" value="#{bundle.Previous} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasPreviousPage}"/>&nbsp;
+                            <h:commandLink action="#{personController.next}" value="#{bundle.Next} #{personController.pagination.pageSize}" rendered="#{personController.pagination.hasNextPage}"/>&nbsp;
+
+                            <h:dataTable value="#{personController.personClients}" var="item" binding="#{personController.personTable}" class="table table-sm table-hover" >
+                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                <f:facet name="header">
+                                    <h:outputText value="Registro de Clientes"/>
+                                </f:facet>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idPerson}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.name}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.lastname}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Compañia"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.company}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Direccion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.address1}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Direccion 2"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.address2}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Num Movil"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phone1}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Num Movil 2"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phone2}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Email 1"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.email1}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Email 2"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.email2}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha de Creacion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.createdAt}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Opciones"/>
+                                    </f:facet>
+
+                                    <h:commandButton action="#{personController.editPerson(event,1)}" value="Editar" id="edit" class="btn btn-success" />
+                                    <h:outputText value=" "/>
+                                    <h:commandButton action="#{personController.deletePerson(event)}" value="#{bundle.ListPersonDestroyLink}" id="delete" class="btn btn-danger" >
+
+                                    </h:commandButton>
+                                </h:column>
+                            </h:dataTable>
+
+
+                        </h:panelGroup>
+                        <br />
+                        <div class="container">
+                            <h:commandButton value="Add" id="add" action="/client/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
+                        </div>
+                        <br />
+                        <br />
+                    </h:form>
+                    </div>
+
+                </div>
+            </div>
+
         </ui:define>
     </ui:composition>
 

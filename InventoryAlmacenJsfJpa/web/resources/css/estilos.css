@@ -36,3 +36,9 @@
         padding: 0;
         line-height: 1.2;
     }
+    
+ /*Boostrap*/
+ 
+ .nav .nav-item a.active{
+     background: #dfecf1;
+ }
