@@ -12,6 +12,34 @@
         </ui:define>
         <ui:define name="body">
             
+            <!--Menu de Navegacion Horizontal-->
+                <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+                    
+                    
+                    <a class="navbar-brand"  href="#"><i class="fab fa-centercode"></i> Empresa SA </a>
+
+                    
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">Quienes somos <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Contactanos</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">Documentacion</a>
+                            </li>
+                            
+                        </ul>
+                        
+                    </div>
+                    <a class="navbar-brand" href="#">Cerrar Sesion <i class="fas fa-times-circle" style="color: Red;"></i></a>
+
+                </nav>
+            <br/>
+            
             <div class="container-fluid ">
             <div class="row">
             
@@ -81,25 +109,25 @@
                             
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListPersonTitle_idPerson}"/>
+                                    <h:outputText value="Id"/>
                                 </f:facet>
                                 <h:outputText value="#{item.idPerson}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListPersonTitle_name}"/>
+                                    <h:outputText value="Nombre"/>
                                 </f:facet>
                                 <h:outputText value="#{item.name}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListPersonTitle_lastname}"/>
+                                    <h:outputText value="Apellido"/>
                                 </f:facet>
                                 <h:outputText value="#{item.lastname}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListPersonTitle_company}"/>
+                                    <h:outputText value="Compañia"/>
                                 </f:facet>
                                 <h:outputText value="#{item.company}"/>
                             </h:column>
@@ -138,12 +166,6 @@
                                     <h:outputText value="#{bundle.ListPersonTitle_email2}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.email2}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListPersonTitle_kind}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.kind}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">

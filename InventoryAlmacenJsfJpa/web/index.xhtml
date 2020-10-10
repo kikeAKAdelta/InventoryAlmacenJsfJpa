@@ -14,14 +14,46 @@
             <ui:define name="body">
                 
                
-                         
-                <div class="container-fluid ">
+                
+                <!--Menu de Navegacion Horizontal-->
+                <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+                    
+                    
+                    <a class="navbar-brand"  href="#"><i class="fab fa-centercode"></i> Empresa SA </a>
 
-                    <div class="row">
-                        <div class="col-2">
+                    
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">Quienes somos <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Contactanos</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">Documentacion</a>
+                            </li>
                             
+                        </ul>
+                        
+                    </div>
+                    <a class="navbar-brand" href="#">Cerrar Sesion <i class="fas fa-times-circle" style="color: Red;"></i></a>
+
+                </nav>
+            <br/>
+            
+            
+
+
+                <!-- Menu de Navegacion Vertical-->
+                <div class="container-fluid ">
+                    
+                     <div class="row">
+                        <div class="col-2">
+
                             <ul class="nav flex-column " >
-                                
+
                                 <li class="nav-item ">
                                     <a class="nav-link active" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/index.xhtml">Home</a>
                                 </li>
@@ -57,35 +89,35 @@
                                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                                 </li>
                             </ul>
-                               
+
                         </div>
-                    
 
-                    
-                        <div class="col-sm">
 
-                            <h:form >
+
+                        <div class="col-sm-8">
+
+                            <h:form class="form-group" >
                                 <br>
                                 </br>
-                                <p:dataTable value="valor"  >
+                                <h:dataTable value="valor" class="table table-hover"  >
                                     <f:facet name="header">
                                         <h:outputText value="Registros"/>
                                     </f:facet>
-                                    <p:column >
+                                    <h:column >
                                         <f:facet name="header">
                                             <h:outputText value="Nombre"/>
                                         </f:facet>
                                         <h:outputText value="Clientes"/>
-                                    </p:column>
+                                    </h:column>
 
-                                    <p:column >
+                                    <h:column >
                                         <f:facet name="header">
                                             <h:outputText value="Conteo"/>
                                         </f:facet>
                                         <h:outputText value="#{personController.countPersonClient}"/>
 
-                                    </p:column>
-                                </p:dataTable>
+                                    </h:column>
+                                </h:dataTable>
 
                             </h:form>
                         </div>
