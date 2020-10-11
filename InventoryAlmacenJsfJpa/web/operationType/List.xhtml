@@ -11,82 +11,133 @@
             <h:outputText value="#{bundle.ListOperationTypeTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            
-            <h:form>
-                    <p:tabMenu activeIndex="#{param.i}" >
-                       <p:menuitem value="Home" outcome="/index" icon="ui-icon-star" styleClass="ui-menuitem">
-                            <f:param name="i" value="0" />
-                        </p:menuitem>
-                        <p:menuitem value="Proveedores" outcome="/provider/List" icon="ui-icon-star">
-                            <f:param name="i" value="1" />
-                        </p:menuitem>
-                         <p:menuitem value="Clientes" outcome="/client/List" icon="ui-icon-star">
-                            <f:param name="i" value="2" />
-                        </p:menuitem>
-                        <p:menuitem value="Productos" outcome="/product/List" icon="ui-icon-star">
-                            <f:param name="i" value="3" />
-                        </p:menuitem>
-                        <p:menuitem value="Categoria" outcome="/category/List" icon="ui-icon-star">
-                            <f:param name="i" value="4" />
-                        </p:menuitem>
-                        <p:menuitem value="Tipo de Producto" outcome="/productType/List" icon="ui-icon-star">
-                            <f:param name="i" value="5" />
-                        </p:menuitem>
-                        <p:menuitem value="Compra/Venta" outcome="/sell/List" icon="ui-icon-star">
-                            <f:param name="i" value="6" />
-                        </p:menuitem>
-                        <p:menuitem value="Usuarios" outcome="/user/List" icon="ui-icon-star">
-                            <f:param name="i" value="7" />
-                        </p:menuitem>
-                        <p:menuitem value="Corte de Caja" outcome="/box/List" icon="ui-icon-star">
-                            <f:param name="i" value="8" />
-                        </p:menuitem>
-                        <p:menuitem value="Operacion" outcome="/operation/List" icon="ui-icon-star">
-                            <f:param name="i" value="9" />
-                        </p:menuitem>
-                   </p:tabMenu>
-                </h:form>
-            
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListOperationTypeEmpty}" rendered="#{operationTypeController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{operationTypeController.items.rowCount > 0}">
-                    <h:outputText value="#{operationTypeController.pagination.pageFirstItem + 1}..#{operationTypeController.pagination.pageLastItem + 1}/#{operationTypeController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{operationTypeController.previous}" value="#{bundle.Previous} #{operationTypeController.pagination.pageSize}" rendered="#{operationTypeController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{operationTypeController.next}" value="#{bundle.Next} #{operationTypeController.pagination.pageSize}" rendered="#{operationTypeController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{operationTypeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListOperationTypeTitle_idOperationType}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idOperationType}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListOperationTypeTitle_name}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.name}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{operationTypeController.prepareView}" value="#{bundle.ListOperationTypeViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{operationTypeController.prepareEdit}" value="#{bundle.ListOperationTypeEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{operationTypeController.destroy}" value="#{bundle.ListOperationTypeDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{operationTypeController.prepareCreate}" value="#{bundle.ListOperationTypeCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListOperationTypeIndexLink}"/>
-            </h:form>
+
+            <!--Menu de Navegacion Horizontal-->
+            <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+
+
+                <a class="navbar-brand"  href="#"><i class="fab fa-centercode"></i> Empresa SA </a>
+
+
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Quienes somos <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Contactanos</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Documentacion</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <a class="navbar-brand" href="#">Cerrar Sesion <i class="fas fa-times-circle" style="color: Red;"></i></a>
+
+            </nav>
+            <br/>
+
+            <!--Menu de navegacion-->
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-2">
+                        <ul class="nav flex-column " >
+
+                            <li class="nav-item ">
+                                <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/index.xhtml"> <i class="fas fa-home">&nbsp;</i>Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/provider/List.xhtml"><i class="fas fa-handshake">&nbsp;</i>Proveedores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/client/List.xhtml"><i class="fas fa-child">&nbsp;</i>Clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/product/List.xhtml"><i class="fas fa-box">&nbsp;</i>Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/category/List.xhtml"><i class="fas fa-spinner">&nbsp;</i>Categoria</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/productType/List.xhtml"><i class="fas fa-box-open">&nbsp;</i>Tipo De Producto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/sell/List.xhtml"><i class="fas fa-wallet">&nbsp;</i>Compra/Venta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/user/List.xhtml"><i class="fas fa-users">&nbsp;</i>Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/box/List.xhtml"><i class="fas fa-cash-register">&nbsp;</i>Corte de Caja</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operation/List.xhtml"><i class="fab fa-stack-exchange">&nbsp;</i>Operacion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operationType/List.xhtml"><i class="fas fa-recycle">&nbsp;</i>Tipo Operacion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-auto">
+
+                        <h1>Tipo de Operacion</h1>
+
+                        <h:form class="form-group">
+
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <p:messages />
+                            </h:panelGroup>
+
+                            <h:outputText escape="false" value="#{bundle.ListOperationTypeEmpty}" rendered="#{operationTypeController.items.rowCount == 0}"/>
+                            <h:panelGroup rendered="#{operationTypeController.items.rowCount > 0}">
+                                <h:outputText value="#{operationTypeController.pagination.pageFirstItem + 1}..#{operationTypeController.pagination.pageLastItem + 1}/#{operationTypeController.pagination.itemsCount}"/>&nbsp;
+                                <h:commandLink action="#{operationTypeController.previous}" value="#{bundle.Previous} #{operationTypeController.pagination.pageSize}" rendered="#{operationTypeController.pagination.hasPreviousPage}"/>&nbsp;
+                                <h:commandLink action="#{operationTypeController.next}" value="#{bundle.Next} #{operationTypeController.pagination.pageSize}" rendered="#{operationTypeController.pagination.hasNextPage}"/>&nbsp;
+
+                                <h:dataTable value="#{operationTypeController.items}" var="item" binding="#{operationTypeController.operationTypeTable}" class="table table-hover">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListOperationTypeTitle_idOperationType}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idOperationType}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListOperationTypeTitle_name}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.name}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Opciones"/>
+                                        </f:facet>
+                                        <h:commandButton action="#{operationTypeController.editOperationType(event)}" value="Editar" id="edit" class="btn btn-success" />
+                                        <h:outputText value=" "/>
+                                        <h:commandButton action="#{operationTypeController.deleteOperationType(event)}" value="#{bundle.ListOperationTypeDestroyLink}" id="delete" class="btn btn-danger" >
+                                        </h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                            <br />
+                            <div class="container">
+                                <h:commandButton value="Add" id="add" action="/operationType/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
+                            </div>
+                            <br />
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
         </ui:define>
     </ui:composition>
 

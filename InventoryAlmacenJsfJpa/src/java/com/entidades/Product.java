@@ -267,7 +267,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entidades.Product[ idProduct=" + idProduct + " ]";
+        return idProduct + " " + name;
     }
 
     public String getIdPerson() {

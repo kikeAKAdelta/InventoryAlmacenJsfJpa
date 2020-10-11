@@ -79,6 +79,9 @@
                                     <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operation/List.xhtml"><i class="fab fa-stack-exchange">&nbsp;</i>Operacion</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operationType/List.xhtml"><i class="fas fa-recycle">&nbsp;</i>Tipo Operacion</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                                 </li>
                             </ul>
@@ -90,16 +93,19 @@
                         <div class="col-sm">
             
             
-            <h:form styleClass="jsfcrud_list_form">
+                            <h:form class="formg-group clientForm">
+                                
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
+                                
                 <h:outputText escape="false" value="#{bundle.ListOperationEmpty}" rendered="#{operationController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{operationController.items.rowCount > 0}">
                     <h:outputText value="#{operationController.pagination.pageFirstItem + 1}..#{operationController.pagination.pageLastItem + 1}/#{operationController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{operationController.previous}" value="#{bundle.Previous} #{operationController.pagination.pageSize}" rendered="#{operationController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{operationController.next}" value="#{bundle.Next} #{operationController.pagination.pageSize}" rendered="#{operationController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{operationController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    
+                    <h:dataTable value="#{operationController.items}" var="item" binding="#{operationController.operationTable}" class="table table-hover">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListOperationTitle_idOperation}"/>
@@ -140,22 +146,22 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="Opciones"/>
                             </f:facet>
-                            <h:commandLink action="#{operationController.prepareView}" value="#{bundle.ListOperationViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{operationController.prepareEdit}" value="#{bundle.ListOperationEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{operationController.destroy}" value="#{bundle.ListOperationDestroyLink}"/>
+                                <h:commandButton action="#{operationController.editOperation(event)}" value="Editar" id="edit" class="btn btn-success" />
+                                    <h:outputText value=" "/>
+                                    <h:commandButton action="#{operationController.deleteOperation(event)}" value="#{bundle.ListOpeartionDestroyLink}" id="delete" class="btn btn-danger" >
+
+                                    </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <p:commandButton value="Add" id="add" action="#{operationController.prepareCreate}" style="margin-right:20px;" styleClass="ui-priority-primary" />
+                <h:commandButton value="Add" id="add" action="#{operationController.prepareCreate}" style="margin-right:20px;" class="btn btn-primary" />
                 
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.ListOperationIndexLink}"/>
+                
             </h:form>
                             </div>
                         </div>

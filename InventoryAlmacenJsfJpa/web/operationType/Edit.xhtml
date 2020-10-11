@@ -3,33 +3,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.EditOperationTypeTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            
+            
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:messages/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
+            
+            <div class="container">
+                <h:form class="form-group clientForm">
+                    
+                    <h:panelGrid columns="2" class="clientGrid">
+                        
                     <h:outputLabel value="#{bundle.EditOperationTypeLabel_idOperationType}" for="idOperationType" />
-                    <h:inputText id="idOperationType" value="#{operationTypeController.selected.idOperationType}" title="#{bundle.EditOperationTypeTitle_idOperationType}" required="true" requiredMessage="#{bundle.EditOperationTypeRequiredMessage_idOperationType}"/>
+                    <h:inputText id="idOperationType" value="#{operationTypeController.current.idOperationType}" title="#{bundle.EditOperationTypeTitle_idOperationType}" required="true" requiredMessage="#{bundle.EditOperationTypeRequiredMessage_idOperationType}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditOperationTypeLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{operationTypeController.selected.name}" title="#{bundle.EditOperationTypeTitle_name}" required="true" requiredMessage="#{bundle.EditOperationTypeRequiredMessage_name}"/>
-                </h:panelGrid>
-                <h:commandLink action="#{operationTypeController.update}" value="#{bundle.EditOperationTypeSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditOperationTypeViewLink}"/>
-                <br />
-                <h:commandLink action="#{operationTypeController.prepareList}" value="#{bundle.EditOperationTypeShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditOperationTypeIndexLink}" />
+                    <h:inputText id="name" value="#{operationTypeController.current.name}" title="#{bundle.EditOperationTypeTitle_name}" required="true" requiredMessage="#{bundle.EditOperationTypeRequiredMessage_name}" class="form-control"/>
+                
+                    <h:panelGroup /> <h:panelGroup />
+                    <h:commandButton action="#{operationTypeController.update}" value="Editar" class="btn btn-primary"/>   
+                    <h:commandButton action="/operationType/List?faces-redirect=true" value="Cancelar" class="btn btn-danger" />
+                    
+                    
+                   </h:panelGrid>
+                
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 

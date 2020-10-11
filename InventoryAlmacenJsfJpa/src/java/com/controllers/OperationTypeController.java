@@ -4,13 +4,18 @@ import com.entidades.OperationType;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.OperationTypeFacade;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -19,11 +24,12 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("operationTypeController")
-@SessionScoped
+@RequestScoped
 public class OperationTypeController implements Serializable {
 
     private OperationType current;
     private DataModel items = null;
+    private UIData operationTypeTable;
     @EJB
     private com.beans.OperationTypeFacade ejbFacade;
     private PaginationHelper pagination;
@@ -191,6 +197,57 @@ public class OperationTypeController implements Serializable {
     public OperationType getOperationType(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    /*------------------Metodos propios Enrique-------------*/
+    
+    //-----------elimina a un cliente -------------
+    public void deleteOperationType(ActionEvent event){
+        current = (OperationType) this.operationTypeTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdOperationType());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        destroy();
+    }
+
+    //------------edita un client -----------
+    public String editOperationType(ActionEvent event){
+        current = (OperationType) this.operationTypeTable.getRowData();
+                
+       
+        
+        return "/operationType/Edit";
+    }
+    
+    @PostConstruct
+    public void init(){
+        this.current = new OperationType();
+    }
+
+    public OperationType getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(OperationType current) {
+        this.current = current;
+    }
+
+    public UIData getOperationTypeTable() {
+        return operationTypeTable;
+    }
+
+    public void setOperationTypeTable(UIData operationTypeTable) {
+        this.operationTypeTable = operationTypeTable;
+    }
+    
+    
+    
+    
+    
+    
+    
+    /*-----------------------Fin------------------------------*/
 
     @FacesConverter(forClass = OperationType.class)
     public static class OperationTypeControllerConverter implements Converter {

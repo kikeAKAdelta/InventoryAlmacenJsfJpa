@@ -4,13 +4,18 @@ import com.entidades.Operation;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.OperationFacade;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -19,10 +24,11 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("operationController")
-@SessionScoped
+@RequestScoped
 public class OperationController implements Serializable {
 
     private Operation current;
+    private UIData operationTable;
     private DataModel items = null;
     @EJB
     private com.beans.OperationFacade ejbFacade;
@@ -191,6 +197,52 @@ public class OperationController implements Serializable {
     public Operation getOperation(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    /*-----------Metodos propdios Enrique-----------*/
+    
+    //-----------elimina a un cliente -------------
+    public void deletePerson(ActionEvent event){
+        current = (Operation) this.operationTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdOperation());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        performDestroy();
+    }
+
+    //------------edita un client -----------
+    public String editPerson(ActionEvent event, int tipoPerson){
+        current = (Operation) this.operationTable.getRowData();
+        
+        return "/operation/Edit";
+    }
+    
+    @PostConstruct
+    public void init(){
+        this.current = new Operation();
+    }
+
+    public Operation getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Operation current) {
+        this.current = current;
+    }
+
+    public UIData getOperationTable() {
+        return operationTable;
+    }
+
+    public void setOperationTable(UIData operationTable) {
+        this.operationTable = operationTable;
+    }
+    
+    
+    
+    
+    /*------------------------Fin-----------------------*/
 
     @FacesConverter(forClass = Operation.class)
     public static class OperationControllerConverter implements Converter {
