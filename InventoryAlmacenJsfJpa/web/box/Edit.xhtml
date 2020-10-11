@@ -3,35 +3,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.EditBoxTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:messages />
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
+            <div class="container">
+                
+               
+                
+                <h:form class="form-group clientForm">
+                    
+                    
+                    <h:panelGrid columns="2" class="clientGrid">
+                    <h1>Editar</h1>
+                    <h:outputLabel />
+                         
                     <h:outputLabel value="#{bundle.EditBoxLabel_idBox}" for="idBox" />
-                    <h:inputText id="idBox" value="#{boxController.selected.idBox}" title="#{bundle.EditBoxTitle_idBox}" required="true" requiredMessage="#{bundle.EditBoxRequiredMessage_idBox}"/>
+                    <h:inputText id="idBox" value="#{boxController.current.idBox}" title="#{bundle.EditBoxTitle_idBox}" required="true" requiredMessage="#{bundle.EditBoxRequiredMessage_idBox}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.EditBoxLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{boxController.selected.createdAt}" title="#{bundle.EditBoxTitle_createdAt}" required="true" requiredMessage="#{bundle.EditBoxRequiredMessage_createdAt}">
+                    <h:inputText id="createdAt" value="#{boxController.selected.createdAt}" title="#{bundle.EditBoxTitle_createdAt}" required="true" requiredMessage="#{bundle.EditBoxRequiredMessage_createdAt}" class="form-control">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
+                    
+                    <h:outputLabel /><h:outputLabel />
+                    
+                    <h:commandButton action="#{boxController.update}" value="Editar" class="btn btn-primary"/>   
+                    <h:commandButton action="/box/List?faces-redirect=true" value="Cancelar" class="btn btn-danger" />
+                
                 </h:panelGrid>
-                <h:commandLink action="#{boxController.update}" value="#{bundle.EditBoxSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditBoxViewLink}"/>
-                <br />
-                <h:commandLink action="#{boxController.prepareList}" value="#{bundle.EditBoxShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditBoxIndexLink}" />
+                
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 

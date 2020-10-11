@@ -11,132 +11,139 @@
             <h:outputText value="#{bundle.ListBoxTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            
+
             <!--Menu de Navegacion Horizontal-->
-                <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
-                    
-                    
-                    <a class="navbar-brand"  href="#"><i class="fab fa-centercode"></i> Empresa SA </a>
+            <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
 
-                    
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">Quienes somos <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Contactanos</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">Documentacion</a>
-                            </li>
-                            
-                        </ul>
-                        
-                    </div>
-                    <a class="navbar-brand" href="#">Cerrar Sesion <i class="fas fa-times-circle" style="color: Red;"></i></a>
+                <a class="navbar-brand"  href="#"><i class="fab fa-centercode"></i> Empresa SA </a>
 
-                </nav>
+
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Quienes somos <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Contactanos</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Documentacion</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <a class="navbar-brand" href="#">Cerrar Sesion <i class="fas fa-times-circle" style="color: Red;"></i></a>
+
+            </nav>
             <br/>
-            
+
+            <!-- Menu de navegacion Horizontal -->
+
             <div class="container-fluid ">
 
-                    <div class="row">
-                        <div class="col-2">
-                            
-                            <ul class="nav flex-column " >
-                                
-                                <li class="nav-item ">
-                                    <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/index.xhtml"><i class="fas fa-home">&nbsp;</i>Home</a>
-                                </li>
+                <div class="row">
+                    <div class="col-2">
 
-                                <li class="nav-item">
-                                    <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/provider/List.xhtml"><i class="fas fa-handshake">&nbsp;</i>Proveedores</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/client/List.xhtml"><i class="fas fa-child">&nbsp;</i>Clientes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/product/List.xhtml"><i class="fas fa-box">&nbsp;</i>Productos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/category/List.xhtml"><i class="fas fa-spinner">&nbsp;</i>Categoria</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/productType/List.xhtml"><i class="fas fa-box-open">&nbsp;</i>Tipo De Producto</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/sell/List.xhtml"><i class="fas fa-wallet">&nbsp;</i>Compra/Venta</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/user/List.xhtml"><i class="fas fa-users">&nbsp;</i>Usuarios</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/box/List.xhtml"><i class="fas fa-cash-register">&nbsp;</i>Corte de Caja</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operation/List.xhtml"><i class="fab fa-stack-exchange">&nbsp;</i>Operacion</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                                </li>
-                            </ul>
-                               
-                        </div>
-                    
+                        <ul class="nav flex-column " >
 
-                    
-                        <div class="col-sm">
-            
-            
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListBoxEmpty}" rendered="#{boxController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{boxController.items.rowCount > 0}">
-                    <h:outputText value="#{boxController.pagination.pageFirstItem + 1}..#{boxController.pagination.pageLastItem + 1}/#{boxController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{boxController.previous}" value="#{bundle.Previous} #{boxController.pagination.pageSize}" rendered="#{boxController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{boxController.next}" value="#{bundle.Next} #{boxController.pagination.pageSize}" rendered="#{boxController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{boxController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBoxTitle_idBox}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idBox}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBoxTitle_createdAt}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.createdAt}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{boxController.prepareView}" value="#{bundle.ListBoxViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{boxController.prepareEdit}" value="#{bundle.ListBoxEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{boxController.destroy}" value="#{bundle.ListBoxDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <p:commandButton value="Add" id="add" action="#{boxController.prepareCreate}" style="margin-right:20px;" styleClass="ui-priority-primary" />
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListBoxIndexLink}"/>
-            </h:form>
-                            
-                            </div>
-                        </div>
-                </div>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/index.xhtml"><i class="fas fa-home">&nbsp;</i>Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/provider/List.xhtml"><i class="fas fa-handshake">&nbsp;</i>Proveedores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/client/List.xhtml"><i class="fas fa-child">&nbsp;</i>Clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/product/List.xhtml"><i class="fas fa-box">&nbsp;</i>Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/category/List.xhtml"><i class="fas fa-spinner">&nbsp;</i>Categoria</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/productType/List.xhtml"><i class="fas fa-box-open">&nbsp;</i>Tipo De Producto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/sell/List.xhtml"><i class="fas fa-wallet">&nbsp;</i>Compra/Venta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/user/List.xhtml"><i class="fas fa-users">&nbsp;</i>Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/box/List.xhtml"><i class="fas fa-cash-register">&nbsp;</i>Corte de Caja</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operation/List.xhtml"><i class="fab fa-stack-exchange">&nbsp;</i>Operacion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+                    <!-- tabla de datos -->
+                    <div class="col-sm">
                         
+                        <h1>Lista de Cortes de Caja</h1>
+                        <h:form class="form-group clientForm">
+                            
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <p:messages />
+                            </h:panelGroup>
+                            
+                            <h:outputText escape="false" value="#{bundle.ListBoxEmpty}" rendered="#{boxController.items.rowCount == 0}"/>
+                            <h:panelGroup rendered="#{boxController.items.rowCount > 0}">
+                                <h:outputText value="#{boxController.pagination.pageFirstItem + 1}..#{boxController.pagination.pageLastItem + 1}/#{boxController.pagination.itemsCount}"/>&nbsp;
+                                <h:commandLink action="#{boxController.previous}" value="#{bundle.Previous} #{boxController.pagination.pageSize}" rendered="#{boxController.pagination.hasPreviousPage}"/>&nbsp;
+                                <h:commandLink action="#{boxController.next}" value="#{bundle.Next} #{boxController.pagination.pageSize}" rendered="#{boxController.pagination.hasNextPage}"/>&nbsp;
+                                
+                                <h:dataTable value="#{boxController.items}" var="item" binding="#{boxController.boxTable}"  class="table table-hover">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Id"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idBox}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha de Creacion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.createdAt}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Opciones"/>
+                                        </f:facet>
+                                        <h:commandButton action="#{boxController.editBox(event)}" value="Editar" id="edit" class="btn btn-success" />
+                                    <h:outputText value=" "/>
+                                    <h:commandButton action="#{boxController.deleteBox(event)}" value="#{bundle.ListBoxDestroyLink}" id="delete" class="btn btn-danger" >
+
+                                    </h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                            <br />
+                             <div class="container">
+                                <h:commandButton value="Add" id="add" action="/box/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
+                            </div>
+                            <br />
+                            <br />
+                            
+                        </h:form>
+
+                    </div>
+                </div>
+            </div>
+
         </ui:define>
     </ui:composition>
 

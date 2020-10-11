@@ -3,34 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.CreateBoxTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            
+            
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:messages />
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateBoxLabel_idBox}" for="idBox" />
-                    <h:inputText id="idBox" value="#{boxController.selected.idBox}" title="#{bundle.CreateBoxTitle_idBox}" required="true" requiredMessage="#{bundle.CreateBoxRequiredMessage_idBox}"/>
+            <div class="container">
+                <h1>Crear Nuevo Corte de Caja</h1>
+                <br></br>
+                
+                <h:form class="form-group clientForm">
+                    
+                    <h:panelGrid columns="2" class="clientGrid">
+                        
+                    <h:outputLabel value="Id" for="idBox" />
+                    <h:inputText id="idBox" value="#{boxController.selected.idBox}" title="#{bundle.CreateBoxTitle_idBox}" required="true" requiredMessage="#{bundle.CreateBoxRequiredMessage_idBox}" class="form-control"/>
+                    
                     <h:outputLabel value="#{bundle.CreateBoxLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{boxController.selected.createdAt}" title="#{bundle.CreateBoxTitle_createdAt}" required="true" requiredMessage="#{bundle.CreateBoxRequiredMessage_createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                    <p:calendar id="idCreatedAt" value="#{boxController.selected.createdAt}" pattern="dd-MM-yyyy" required="true" requiredMessage="# {bundle.CreatePersonRequiredMessage_createdAt}" />
+                    
+                    <h:outputLabel />
+                    <h:outputLabel />
+                <h:commandButton action="#{boxController.create()}" value="#{bundle.CreateBoxSaveLink}" class="btn btn-success" />
+                <h:commandButton action="/box/List?faces-redirect=true" value="Cancel" immediate="true" class="btn btn-danger"/>
+                <br />
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{boxController.create}" value="#{bundle.CreateBoxSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{boxController.prepareList}" value="#{bundle.CreateBoxShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateBoxIndexLink}"/>
+                
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 

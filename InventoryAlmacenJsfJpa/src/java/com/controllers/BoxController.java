@@ -4,13 +4,18 @@ import com.entidades.Box;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.BoxFacade;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -19,11 +24,12 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("boxController")
-@SessionScoped
+@RequestScoped
 public class BoxController implements Serializable {
 
     private Box current;
     private DataModel items = null;
+    private UIData boxTable;
     @EJB
     private com.beans.BoxFacade ejbFacade;
     private PaginationHelper pagination;
@@ -100,7 +106,7 @@ public class BoxController implements Serializable {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BoxUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -191,6 +197,59 @@ public class BoxController implements Serializable {
     public Box getBox(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    /*-----------Metodos propios Enrique-----------*/
+    
+    
+    //Metodo para eliminar un box
+    public void deleteBox(ActionEvent event){
+        current = (Box) this.boxTable.getRowData();
+        FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdBox());
+        
+        facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        destroy();
+    }
+
+    //------------edita un box -----------
+    public String editBox(ActionEvent event){
+        current = (Box) this.boxTable.getRowData();
+        
+        return "/box/Edit";
+    }
+    
+    
+    //Inicializa por defecto
+    @PostConstruct
+    public void init(){
+        this.current = new Box();
+    }
+
+    public Box getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Box current) {
+        this.current = current;
+    }
+
+    public UIData getBoxTable() {
+        return boxTable;
+    }
+
+    public void setBoxTable(UIData boxTable) {
+        this.boxTable = boxTable;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    /*-------------------------fin--------------------*/
 
     @FacesConverter(forClass = Box.class)
     public static class BoxControllerConverter implements Converter {
