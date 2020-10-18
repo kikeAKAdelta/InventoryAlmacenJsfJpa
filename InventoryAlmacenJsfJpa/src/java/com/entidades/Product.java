@@ -273,5 +273,9 @@ public class Product implements Serializable {
     public String getIdPerson() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
+    
+    
     
 }

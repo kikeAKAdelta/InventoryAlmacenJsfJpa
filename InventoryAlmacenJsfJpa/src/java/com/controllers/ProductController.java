@@ -7,12 +7,12 @@ import com.beans.ProductFacade;
 import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
@@ -37,6 +37,8 @@ public class ProductController implements Serializable {
 
     public ProductController() {
     }
+    
+    
 
     public Product getSelected() {
         if (current == null) {
@@ -198,7 +200,7 @@ public class ProductController implements Serializable {
         return ejbFacade.find(id);
     }
     
-    /*-----------Metodos propios Enrique-----------*/
+    /*-------------------------------Metodos propios Enrique--------------------------------*/
     
     //Eliminar un producto
     public void deleteProduct(ActionEvent event){
@@ -229,6 +231,16 @@ public class ProductController implements Serializable {
         performDestroy();
     }
     
+    
+    //Obtener nombre de la categoria
+    public List<Product> obtenerNombreCategoria(){
+        return ejbFacade.getNombreCategoria();
+    }
+    //Obtener nombre de la categoria
+    public List<Product> getAllProducts(){
+        return ejbFacade.getAllProducts();
+    }
+    
     @PostConstruct
     public void init(){
         this.current = new Product();
@@ -249,6 +261,7 @@ public class ProductController implements Serializable {
     public void setProductTable(UIData productTable) {
         this.productTable = productTable;
     }
+    
     
     
     

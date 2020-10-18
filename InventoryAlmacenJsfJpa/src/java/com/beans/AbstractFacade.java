@@ -102,6 +102,33 @@ public abstract class AbstractFacade<T> {
        return Integer.parseInt(query.getSingleResult().toString());
    }
    
+   
+   //obtener nombre de id categoria
+   public List<T> getNombreCategoria(){
+       Query query = getEntityManager().createQuery("Select p.idProduct, p.name, p.description,p.inventaryMin,p.priceIn, p.priceOut, p.unit, p.createdAt, c.name, u.name\n" +
+        "from Product p \n" +
+        "JOIN p.idCategory c\n" +
+        "JOIN p.idUser u");
+       
+       return query.getResultList();
+   }
+   
+   //obtener nombre de id categoria
+   public List<T> getAllProducts(){
+       Query query = getEntityManager().createQuery("Select p from Product p");
+       return query.getResultList();
+   }
+   
+   
+   //---Obtener inventario--------------
+   public List<T> getAllIventario(){
+       Query query = getEntityManager().createQuery("select e from Operation e \n" +
+        "join e.idOperationType c\n" +
+        "where c.idOperationType = 1");
+       
+       return query.getResultList();
+   }
+   
    //-------------- fin metodos propios
     
 }

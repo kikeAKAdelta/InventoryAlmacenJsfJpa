@@ -199,7 +199,7 @@ public class Sell implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entidades.Sell[ idSell=" + idSell + " ]";
+        return idSell + " " ;
     }
     
 }

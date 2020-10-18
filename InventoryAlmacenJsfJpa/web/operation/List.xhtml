@@ -61,6 +61,9 @@
                                     <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/product/List.xhtml"><i class="fas fa-box">&nbsp;</i>Productos</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/inventario/List.xhtml" ><i class="fas fa-truck-loading">&nbsp;</i>Inventario</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/category/List.xhtml"><i class="fas fa-spinner">&nbsp;</i>Categoria</a>
                                 </li>
                                 <li class="nav-item">
@@ -150,14 +153,14 @@
                             </f:facet>
                                 <h:commandButton action="#{operationController.editOperation(event)}" value="Editar" id="edit" class="btn btn-success" />
                                     <h:outputText value=" "/>
-                                    <h:commandButton action="#{operationController.deleteOperation(event)}" value="#{bundle.ListOpeartionDestroyLink}" id="delete" class="btn btn-danger" >
+                                    <h:commandButton action="#{operationController.deleteOperation(event)}" value="#{bundle.ListOperationDestroyLink}" id="delete" class="btn btn-danger" >
 
                                     </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandButton value="Add" id="add" action="#{operationController.prepareCreate}" style="margin-right:20px;" class="btn btn-primary" />
+                <h:commandButton value="Add" id="add" action="/operation/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
                 
                 <br />
                 <br />

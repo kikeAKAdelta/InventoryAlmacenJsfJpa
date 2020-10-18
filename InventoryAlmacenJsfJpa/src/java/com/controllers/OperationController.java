@@ -7,6 +7,7 @@ import com.beans.OperationFacade;
 import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -200,7 +201,7 @@ public class OperationController implements Serializable {
     
     /*-----------Metodos propdios Enrique-----------*/
     
-    //-----------elimina a un cliente -------------
+    //-----------elimina una operacion -------------
     public void deletePerson(ActionEvent event){
         current = (Operation) this.operationTable.getRowData();
         FacesMessage facesMessage = new FacesMessage("Se ha eliminado!! " + current.getIdOperation());
@@ -211,11 +212,16 @@ public class OperationController implements Serializable {
         performDestroy();
     }
 
-    //------------edita un client -----------
+    //------------edita una operacion -----------
     public String editPerson(ActionEvent event, int tipoPerson){
         current = (Operation) this.operationTable.getRowData();
         
         return "/operation/Edit";
+    }
+    
+    //Obtener inventario
+    public List<Operation> getAllInventario(){
+        return ejbFacade.getAllIventario();
     }
     
     @PostConstruct

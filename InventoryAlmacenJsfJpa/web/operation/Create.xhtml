@@ -13,26 +13,36 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateOperationLabel_idOperation}" for="idOperation" />
-                    <h:inputText id="idOperation" value="#{operationController.selected.idOperation}" title="#{bundle.CreateOperationTitle_idOperation}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idOperation}"/>
-                    <h:outputLabel value="#{bundle.CreateOperationLabel_quantity}" for="quantity" />
-                    <h:inputText id="quantity" value="#{operationController.selected.quantity}" title="#{bundle.CreateOperationTitle_quantity}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_quantity}"/>
-                    <h:outputLabel value="#{bundle.CreateOperationLabel_createdAt}" for="createdAt" />
-                    <h:inputText id="createdAt" value="#{operationController.selected.createdAt}" title="#{bundle.CreateOperationTitle_createdAt}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_createdAt}">
+            
+            <div class="container">
+                
+                <h:form class="form-group clientForm">
+                    
+                    <h:panelGrid columns="2" class="clientGrid">
+                        
+                    <h:outputLabel value="Id" for="idOperation" />
+                    <h:inputText id="idOperation" value="#{operationController.selected.idOperation}" title="#{bundle.CreateOperationTitle_idOperation}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idOperation}" class="form-control"/>
+                    
+                    <h:outputLabel value="Cantidad" for="quantity" />
+                    <h:inputText id="quantity" value="#{operationController.selected.quantity}" title="#{bundle.CreateOperationTitle_quantity}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_quantity}" class="form-control"/>
+                    
+                    <h:outputLabel value="Fecha de Creacion" for="createdAt" />
+                    <h:inputText id="createdAt" value="#{operationController.selected.createdAt}" title="#{bundle.CreateOperationTitle_createdAt}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_createdAt}" class="form-control">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateOperationLabel_idProduct}" for="idProduct" />
-                    <h:selectOneMenu id="idProduct" value="#{operationController.selected.idProduct}" title="#{bundle.CreateOperationTitle_idProduct}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idProduct}">
+                    
+                    <h:outputLabel value="Producto" for="idProduct" />
+                    <h:selectOneMenu id="idProduct" value="#{operationController.selected.idProduct}" title="#{bundle.CreateOperationTitle_idProduct}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idProduct}" class="form-control">
                         <f:selectItems value="#{productController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateOperationLabel_idOperationType}" for="idOperationType" />
-                    <h:selectOneMenu id="idOperationType" value="#{operationController.selected.idOperationType}" title="#{bundle.CreateOperationTitle_idOperationType}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idOperationType}">
+                    
+                    <h:outputLabel value="Tipo de Operacion" for="idOperationType" />
+                    <h:selectOneMenu id="idOperationType" value="#{operationController.selected.idOperationType}" title="#{bundle.CreateOperationTitle_idOperationType}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idOperationType}" class="form-control">
                         <f:selectItems value="#{operationTypeController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateOperationLabel_idSell}" for="idSell" />
-                    <h:selectOneMenu id="idSell" value="#{operationController.selected.idSell}" title="#{bundle.CreateOperationTitle_idSell}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idSell}">
+                    
+                    <h:outputLabel value="Venta/Compra" for="idSell" />
+                    <h:selectOneMenu id="idSell" value="#{operationController.selected.idSell}" title="#{bundle.CreateOperationTitle_idSell}" required="true" requiredMessage="#{bundle.CreateOperationRequiredMessage_idSell}" class="form-control">
                         <f:selectItems value="#{sellController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
@@ -45,6 +55,7 @@
                 <br />
                 <h:link outcome="/index" value="#{bundle.CreateOperationIndexLink}"/>
             </h:form>
+                </div>
         </ui:define>
     </ui:composition>
 
