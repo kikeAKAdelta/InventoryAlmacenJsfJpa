@@ -102,6 +102,13 @@ public abstract class AbstractFacade<T> {
        return Integer.parseInt(query.getSingleResult().toString());
    }
    
+   public Object maxIdObjectSell(){
+       Query query = getEntityManager().createQuery("select p from Sell p where p.idSell=(\n" +
+        "SELECT max(e.idSell) FROM Sell e)");
+       
+       return query.getSingleResult();
+   }
+   
    
    //obtener nombre de id categoria
    public List<T> getNombreCategoria(){
@@ -127,6 +134,22 @@ public abstract class AbstractFacade<T> {
         "where c.idOperationType = 1");
        
        return query.getResultList();
+   }
+   
+   //----Obtener producto por codigo de barra----------
+   public Object getProductData(String barcode){
+       Query query = getEntityManager().createQuery("select p from Product p\n" +
+        "where p.barcode = '"+ barcode + "'");
+       
+       return query.getSingleResult();
+   }
+   
+   //Obtener el tipo de operation
+   public Object getTypeOperation(int operacion){
+       Query query = getEntityManager().createQuery("select e from OperationType e\n" +
+        "where e.idOperationType = '"+operacion+"'");
+       
+       return query.getSingleResult();
    }
    
    //-------------- fin metodos propios

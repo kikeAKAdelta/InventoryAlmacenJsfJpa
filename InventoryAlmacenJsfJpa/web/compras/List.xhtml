@@ -8,7 +8,7 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListSellTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListOperationTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
             
@@ -95,44 +95,35 @@
                     
                         <div class="col-sm">
             
-                            <h:form class="form-group clientForm">
+            
+                            <h:form class="formg-group clientForm">
+                                
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListSellEmpty}" rendered="#{sellController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{sellController.items.rowCount > 0}">
-                    <h:outputText value="#{sellController.pagination.pageFirstItem + 1}..#{sellController.pagination.pageLastItem + 1}/#{sellController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{sellController.previous}" value="#{bundle.Previous} #{sellController.pagination.pageSize}" rendered="#{sellController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{sellController.next}" value="#{bundle.Next} #{sellController.pagination.pageSize}" rendered="#{sellController.pagination.hasNextPage}"/>&nbsp;
+                                
+                <h:outputText escape="false" value="#{bundle.ListOperationEmpty}" rendered="#{operationController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{operationController.items.rowCount > 0}">
+                    <h:outputText value="#{operationController.pagination.pageFirstItem + 1}..#{operationController.pagination.pageLastItem + 1}/#{operationController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{operationController.previous}" value="#{bundle.Previous} #{operationController.pagination.pageSize}" rendered="#{operationController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{operationController.next}" value="#{bundle.Next} #{operationController.pagination.pageSize}" rendered="#{operationController.pagination.hasNextPage}"/>&nbsp;
                     
-                    <h:dataTable value="#{sellController.items}" var="item" class="table table-hover">
+                    <h:dataTable value="#{operationController.items}" var="item" binding="#{operationController.operationTable}" class="table table-hover">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_idSell}"/>
+                                <h:outputText value="#{bundle.ListOperationTitle_idOperation}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idSell}"/>
+                            <h:outputText value="#{item.idOperation}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_total}"/>
+                                <h:outputText value="#{bundle.ListOperationTitle_quantity}"/>
                             </f:facet>
-                            <h:outputText value="#{item.total}"/>
+                            <h:outputText value="#{item.quantity}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_cash}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cash}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_discount}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.discount}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_createdAt}"/>
+                                <h:outputText value="#{bundle.ListOperationTitle_createdAt}"/>
                             </f:facet>
                             <h:outputText value="#{item.createdAt}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -140,46 +131,40 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_idPerson}"/>
+                                <h:outputText value="#{bundle.ListOperationTitle_idProduct}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPerson}"/>
+                            <h:outputText value="#{item.idProduct}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_idUser}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idUser}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_idOperationType}"/>
+                                <h:outputText value="#{bundle.ListOperationTitle_idOperationType}"/>
                             </f:facet>
                             <h:outputText value="#{item.idOperationType}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSellTitle_idBox}"/>
+                                <h:outputText value="#{bundle.ListOperationTitle_idSell}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idBox}"/>
+                            <h:outputText value="#{item.idSell}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="Opciones"/>
                             </f:facet>
-                            <h:commandLink action="#{sellController.prepareView}" value="#{bundle.ListSellViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{sellController.prepareEdit}" value="#{bundle.ListSellEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{sellController.destroy}" value="#{bundle.ListSellDestroyLink}"/>
+                                <h:commandButton action="#{operationController.editOperation(event)}" value="Editar" id="edit" class="btn btn-success" />
+                                    <h:outputText value=" "/>
+                                    <h:commandButton action="#{operationController.deleteOperation(event)}" value="#{bundle.ListOperationDestroyLink}" id="delete" class="btn btn-danger" >
+
+                                    </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{sellController.prepareCreate}" value="#{bundle.ListSellCreateLink}"/>
-                <p:commandButton value="Add" id="add" action="#{sellController.prepareCreate}" style="margin-right:20px;" styleClass="ui-priority-primary" />
+                <h:commandButton value="Add" id="add" action="/operation/Create?faces-redirect=true" style="margin-right:20px;" class="btn btn-primary" />
+                
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.ListSellIndexLink}"/>
+                
             </h:form>
                             </div>
                         </div>

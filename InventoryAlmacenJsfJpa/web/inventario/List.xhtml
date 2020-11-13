@@ -151,16 +151,7 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Opciones"/>
-                            </f:facet>
-                                <h:commandButton action="#{operationController.editOperation(event)}" value="Editar" id="edit" class="btn btn-success" />
-                                    <h:outputText value=" "/>
-                                    <h:commandButton action="#{operationController.deleteOperation(event)}" value="#{bundle.ListOperationDestroyLink}" id="delete" class="btn btn-danger" >
-
-                                    </h:commandButton>
-                        </h:column>
+                        
                     </h:dataTable>
                 </h:panelGroup>
                 <br />

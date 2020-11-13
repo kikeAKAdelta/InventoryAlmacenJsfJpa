@@ -91,6 +91,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/operationType/List.xhtml"><i class="fas fa-recycle">&nbsp;</i>Tipo Operacion</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://localhost:8080/InventoryAlmacenJsfJpa/faces/compras/Create.xhtml"><i class="fas fa-recycle">&nbsp;</i>Comprar</a>
+                                </li>
+                                
                                 
                             </ul>
 
@@ -103,12 +107,12 @@
                             <h:form class="form-group" >
                                 <br>
                                 </br>
-                                <h:dataTable value="valor" class="table table-hover"  >
-                                    <f:facet name="header">
+                                <h:dataTable value="valor" class="table table-hover table-bordered"  >
+                                    <f:facet name="header" class="thead-dark">
                                         <h:outputText value="Registros"/>
                                     </f:facet>
                                     <h:column >
-                                        <f:facet name="header">
+                                        <f:facet name="header" >
                                             <h:outputText value="Nombre"/>
                                         </f:facet>
                                         <h:outputText value="Clientes"/>

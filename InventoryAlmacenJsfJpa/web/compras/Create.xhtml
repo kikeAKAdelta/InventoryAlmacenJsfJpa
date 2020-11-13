@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOperationTitle}"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="body">
+            
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            
+            <div class="container">
+                
+                <h1>Compras</h1>
+                
+                <h:form class="form-group clientForm">
+                    
+                    <div class="row">
+                        <!--
+                        <div class="col">
+                            <h:outputLabel value="Id" for="idOperation" />
+                            <h:inputText id="idOperation" value="# {operationController.selected.idOperation}" title="# {bundle.CreateOperationTitle_idOperation}" class="form-control"/>
+                        </div>
+                        -->
+                        
+                        <div class="col">
+                            <h:outputLabel value="Usuario" for="user" />
+                            <h:selectOneMenu id="user" value="#{operationController.currentUser}" title="#{bundle.CreateOperationTitle_idProduct}" class="form-control">
+                                <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            
+                        </div>
+                        
+                        <div class="col">
+                            <h:outputLabel value="Proveedor" for="provider" />
+                            <h:selectOneMenu id="provider" value="#{operationController.currentPerson}" title="#{bundle.CreateOperationTitle_idProduct}" class="form-control">
+                                <f:selectItems value="#{personController.itemsAvailableSelectOneProviders}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <br /><br />
+                    
+                    <div class="row">
+                        
+                        
+                        <div class="col">
+                            <h:outputLabel value="Codigo de Barra" for="idBarcode" />
+                            <h:inputText id="idBarcode" value="#{operationController.currentProduct.barcode}" title="#{bundle.CreateOperationTitle_idOperation}" class="form-control"/>
+                        </div>
+                        
+                        <div class="col">
+                            <h:outputLabel value="Buscar" for="idBarcode" />
+                            <h:commandButton value="Buscar Producto"  action="#{operationController.getProductData}" class="btn btn-primary" >
+                                <!--<f:ajax execute="@form"  />-->
+                            </h:commandButton>
+                                
+                             
+                        </div>
+
+                        <div class="col">
+                            <h:outputLabel value="Producto" for="nameProduct" />
+                            <h:outputText id="nameProduct" value="#{operationController.currentProduct.name}" title="#{bundle.CreateOperationTitle_idOperation}" class="form-control"/>
+                        </div>
+                        
+                        
+                        <div class="col">
+                            <h:outputLabel value="Precio Unitario" for="priceIn" />
+                            <h:outputText id="priceIn" value="#{operationController.currentProduct.priceIn}" title="#{bundle.CreateOperationTitle_idOperation}" class="form-control" />
+                        </div>
+                        
+                        <div class="col">
+                            <h:outputLabel value="Cantidad" for="quantity" />
+                            <h:inputText id="quantity" value="#{operationController.selected.quantity}" title="#{bundle.CreateOperationTitle_quantity}" class="form-control"/>
+                        </div>
+                        
+                        <div class="col">
+                            <h:outputLabel value="Descuento" for="discount" />
+                            <h:inputText id="discount" value="#{operationController.currentSell.discount}" title="#{bundle.CreateOperationTitle_quantity}" class="form-control"/>
+                        </div>
+
+                        <div class="col">
+                        <h:outputLabel value="Total: ($)" for="total" />
+                        <h:outputText id="total" value="#{operationController.currentSell.total}" title="#{bundle.CreateOperationTitle_quantity}" class="form-control"/>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <h:dataTable value="valor" class="table table-hover table-bordered">
+                            
+                            <f:facet name="header" >
+                                        <h:outputText value="Registros"/>
+                            </f:facet>
+                                    
+                            <h:column >
+                                <f:facet name="header"  >
+                                    <h:outputText value="Nombre" />
+                                </f:facet>
+                                <h:outputText value="Clientes"/>
+                            </h:column>
+                            
+                            <h:column >
+                                <f:facet name="header" >
+                                    <h:outputText value="Conteo"/>
+                                </f:facet>
+                                <h:outputText value="#{personController.countPersonClient}"/>
+
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </div>
+                    <br />
+                    <div class="col">
+                        <h:outputLabel value="Cash: ($)" for="cash" />
+                        <h:inputText id="cash" value="#{operationController.currentSell.cash}" title="#{bundle.CreateOperationTitle_quantity}" class="form-control"/>
+                    </div>
+                    
+                    
+                    
+                    <!--<h:outputLabel value="Fecha de Creacion" for="createdAt" />
+                    <h:inputText id="createdAt" value="# {operationController.selected.createdAt}" title="# {bundle.CreateOperationTitle_createdAt}" class="form-control">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>-->
+                    
+                    <h:outputLabel value="Corte de Caja" for="idBox" />
+                    <h:selectOneMenu id="idBox" value="#{operationController.currentBox}" title="#{bundle.CreateOperationTitle_idProduct}" class="form-control">
+                        <f:selectItems value="#{boxController.itemsAvailableSelectOne}"/>   
+                    </h:selectOneMenu>
+                    
+                    <!--<h:outputLabel value="Tipo de Operacion" for="idOperationType" />
+                    <h:selectOneMenu id="idOperationType" value="#{operationController.selected.idOperationType}" title="#{bundle.CreateOperationTitle_idOperationType}" class="form-control">
+                        <f:selectItems value="#{operationTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>-->
+                    
+                    <!--<h:outputLabel value="Id Sell Compra" for="idSell" />
+                    <h:selectOneMenu id="idSell" value="# {operationController.selected.idSell}" title="# {bundle.CreateOperationTitle_idSell}" class="form-control">
+                        <f:selectItems value="# {sellController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>-->
+                
+                <br />
+                <h:commandLink action="#{operationController.create}" value="#{bundle.CreateOperationSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{operationController.prepareList}" value="#{bundle.CreateOperationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOperationIndexLink}"/>
+            </h:form>
+                </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

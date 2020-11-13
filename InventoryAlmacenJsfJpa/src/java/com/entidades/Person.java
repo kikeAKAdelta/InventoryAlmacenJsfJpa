@@ -259,7 +259,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entidades.Person[ idPerson=" + idPerson + " ]";
+        return  idPerson + " " + name;
     }
     
 }

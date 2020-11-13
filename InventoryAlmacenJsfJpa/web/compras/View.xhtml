@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOperationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOperationLabel_idOperation}"/>
+                    <h:outputText value="#{operationController.selected.idOperation}" title="#{bundle.ViewOperationTitle_idOperation}"/>
+                    <h:outputText value="#{bundle.ViewOperationLabel_quantity}"/>
+                    <h:outputText value="#{operationController.selected.quantity}" title="#{bundle.ViewOperationTitle_quantity}"/>
+                    <h:outputText value="#{bundle.ViewOperationLabel_createdAt}"/>
+                    <h:outputText value="#{operationController.selected.createdAt}" title="#{bundle.ViewOperationTitle_createdAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewOperationLabel_idProduct}"/>
+                    <h:outputText value="#{operationController.selected.idProduct}" title="#{bundle.ViewOperationTitle_idProduct}"/>
+                    <h:outputText value="#{bundle.ViewOperationLabel_idOperationType}"/>
+                    <h:outputText value="#{operationController.selected.idOperationType}" title="#{bundle.ViewOperationTitle_idOperationType}"/>
+                    <h:outputText value="#{bundle.ViewOperationLabel_idSell}"/>
+                    <h:outputText value="#{operationController.selected.idSell}" title="#{bundle.ViewOperationTitle_idSell}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{operationController.destroyAndView}" value="#{bundle.ViewOperationDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOperationEditLink}"/>
+                <br />
+                <h:commandLink action="#{operationController.prepareCreate}" value="#{bundle.ViewOperationCreateLink}" />
+                <br />
+                <h:commandLink action="#{operationController.prepareList}" value="#{bundle.ViewOperationShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOperationIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

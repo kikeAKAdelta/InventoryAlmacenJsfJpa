@@ -4,19 +4,27 @@ import com.entidades.Operation;
 import com.controllers.util.JsfUtil;
 import com.controllers.util.PaginationHelper;
 import com.beans.OperationFacade;
+import com.beans.SellFacade;
+import com.entidades.Box;
+import com.entidades.OperationType;
+import com.entidades.Person;
+import com.entidades.Product;
+import com.entidades.Sell;
+import com.entidades.User;
 import java.awt.event.ActionEvent;
-
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -29,10 +37,17 @@ import javax.faces.model.SelectItem;
 public class OperationController implements Serializable {
 
     private Operation current;
+    private Product currentProduct;
+    private Person currentPerson;
+    private User currentUser;
+    private Sell currentSell;
+    private Box currentBox;
     private UIData operationTable;
     private DataModel items = null;
     @EJB
     private com.beans.OperationFacade ejbFacade;
+    @EJB
+    private com.beans.SellFacade ejbFacadeSell;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -49,6 +64,10 @@ public class OperationController implements Serializable {
 
     private OperationFacade getFacade() {
         return ejbFacade;
+    }
+    
+    private SellFacade getFacadeSell(){
+        return ejbFacadeSell;
     }
 
     public PaginationHelper getPagination() {
@@ -85,10 +104,54 @@ public class OperationController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+    
+//    public String createSell(){
+//        //currentSell.setIdSell(3);
+//            currentSell.setCreatedAt(current.getCreatedAt());
+//            currentSell.setIdPerson(currentPerson);
+//            currentSell.setIdUser(currentUser);
+//            currentSell.setIdOperationType(current.getIdOperationType());
+//            currentSell.setIdBox(currentBox);
+//            getFacadeSell().create(currentSell);
+//            
+//            return "Elemento guardado";
+//    }
 
     public String create() {
         try {
+            
+            //current.getIdSell().setIdUser(currentUser);
+            //current.getIdSell().setIdPerson(currentPerson);
+            Date fecha = new Date();
+            SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+            String cadenaDate = formato.format(fecha);
+            Date dateNow = formato.parse(cadenaDate);
+            OperationType operacion = (OperationType) getFacade().getTypeOperation(1);
+            
+            currentSell.setCreatedAt(dateNow);
+            currentSell.setIdPerson(currentPerson);
+            currentSell.setIdUser(currentUser);
+            currentSell.setIdOperationType(current.getIdOperationType());
+            currentSell.setIdBox(currentBox);
+            currentSell.setIdOperationType(operacion);
+            //getFacadeSell().create(currentSell);
+            
+            Sell newSell = (Sell) getFacadeSell().maxIdObjectSell();
+            
+            //Save compras
+            
+            
+            //Save Operation
+            getProductDataVoid();
+            current.setCreatedAt(dateNow);
+            current.setIdOperationType(operacion);
+            current.setIdProduct(currentProduct);
+            current.setIdSell(currentSell);
+            
+                        
+            
             getFacade().create(current);
+            
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OperationCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -223,10 +286,59 @@ public class OperationController implements Serializable {
     public List<Operation> getAllInventario(){
         return ejbFacade.getAllIventario();
     }
+    private UIInput inputText;
+
+    public UIInput getInputText() {
+        return inputText;
+    }
+
+    public void setInputText(UIInput inputText) {
+        this.inputText = inputText;
+    }
+    
+    
+    //Obtener producto por medio de codigo de barra
+    public String getProductData(){
+ 
+        String barcode = currentProduct.getBarcode();
+        //String idUser2 = currentUser.getIdUser()+"";
+        if(barcode !=  null){
+            FacesMessage facesMessage = new FacesMessage("Tiene algo? "+ barcode);
+            facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            
+            currentProduct = (Product) ejbFacade.getProductData(barcode);
+        }       
+        
+        return "Create";
+        
+    }
+    
+    //Obtener producto por medio de codigo de barra
+    public void getProductDataVoid(){
+ 
+        String barcode = currentProduct.getBarcode();
+        //String idUser2 = currentUser.getIdUser()+"";
+        if(barcode !=  null){
+            FacesMessage facesMessage = new FacesMessage("Tiene algo? "+ barcode);
+            facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+        
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            
+            currentProduct = (Product) ejbFacade.getProductData(barcode);
+        }
+        
+    }
     
     @PostConstruct
     public void init(){
         this.current = new Operation();
+        this.currentProduct = new Product();
+        this.currentPerson = new Person();
+        this.currentUser = new User();
+        this.currentBox = new Box();
+        this.currentSell = new Sell();
     }
 
     public Operation getCurrent() {
@@ -244,6 +356,50 @@ public class OperationController implements Serializable {
     public void setOperationTable(UIData operationTable) {
         this.operationTable = operationTable;
     }
+
+    public Product getCurrentProduct() {
+        return currentProduct;
+    }
+
+    public void setCurrentProduct(Product currentProduct) {
+        this.currentProduct = currentProduct;
+    }
+
+    public Person getCurrentPerson() {
+        return currentPerson;
+    }
+
+    public void setCurrentPerson(Person currentPerson) {
+        this.currentPerson = currentPerson;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public Box getCurrentBox() {
+        return currentBox;
+    }
+
+    public void setCurrentBox(Box currentBox) {
+        this.currentBox = currentBox;
+    }
+
+    public Sell getCurrentSell() {
+        return currentSell;
+    }
+
+    public void setCurrentSell(Sell currentSell) {
+        this.currentSell = currentSell;
+    }
+    
+    
+    
+    
     
     
     

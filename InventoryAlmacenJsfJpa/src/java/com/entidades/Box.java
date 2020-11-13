@@ -111,7 +111,7 @@ public class Box implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entidades.Box[ idBox=" + idBox + " ]";
+        return idBox +" " + createdAt;
     }
     
 }

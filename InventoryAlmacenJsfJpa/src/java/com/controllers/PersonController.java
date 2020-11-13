@@ -239,6 +239,11 @@ public class PersonController implements Serializable {
         return ejbFacade.getPersonProvider();
     }
     
+    //Lista de proveedores en un combobox
+    public SelectItem[] getItemsAvailableSelectOneProviders() {
+        return JsfUtil.getSelectItems(ejbFacade.getPersonProvider(), true);
+    }
+    
     //metodo de limpieza de datos cuando se agrega un nuevo liente
     public void cleanClientTxt(){
         current.setIdPerson(0);
